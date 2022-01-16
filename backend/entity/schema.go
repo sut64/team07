@@ -9,3 +9,9 @@ import (
 		Semester  string
 		//ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
 	}
+
+	type ExamType struct {
+		gorm.Model
+		Type  string
+		//ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
+	}
