@@ -34,6 +34,8 @@ func SetupDatabase() {
  
   db = database
 
+  //password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+
 /*  	registrar1 := Registrar{
 		ID_registrar: "R5678912",
 		Name: "",
