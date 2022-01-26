@@ -121,7 +121,7 @@ func SetupDatabase() {
 		Email: "Pawarit Praneetponkrang",
 		Password: "",
 	}
-	db.Model(&Student{}).Create(&student5)
+	db.Model(&Student{}).Create(&student5)*/ 
 
 	
 	teacher1 := Teacher{
@@ -160,7 +160,7 @@ func SetupDatabase() {
 		Prefix: "Mr.",
 		Major: "CPE",
 	}
-	db.Model(&Teacher{}).Create(&teacher4)*/
+	db.Model(&Teacher{}).Create(&teacher4)
 
   
 	//Course Data
