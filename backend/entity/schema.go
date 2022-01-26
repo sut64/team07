@@ -50,3 +50,15 @@ import (
 	
 		AddCourse []AddCourse `gorm:"foreignKey:ProgramID"`
 	}
+
+	type Teacher struct {
+		gorm.Model
+		ID_teacher string `gorm:"uniqueIndex"`
+		Prefix     string
+		Name       string
+		Major      string
+		Email      string
+		Password   string
+	
+		AddCourse   []AddCourse  `gorm:"foreignKey:TeacherID"`
+	}
