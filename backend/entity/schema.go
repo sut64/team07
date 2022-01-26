@@ -24,8 +24,8 @@ import (
 		StartTime 	 time.Time
 		EndTime		 time.Time
 	
-		/*CourseID *uint
-		Course   Course `gorm:"references:id"`*/
+		CourseID *uint
+		Course   Course `gorm:"references:id"`
 	
 		ExamTypeID *uint
 		ExamType   ExamType `gorm:"references:id"`
