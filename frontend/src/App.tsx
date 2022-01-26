@@ -31,8 +31,8 @@ import AddCourses from "./components/AddCourses";
 import AddCourseCreate from "./components/AddCourseCreate";
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-//import ExamScheduleCreate from "./components/ExamScheduleCreate";
-//import ExamSchedules from "./components/ExamSchedule";
+import ExamScheduleCreate from "./components/ExamScheduleCreate";
+import ExamSchedules from "./components/ExamSchedule";
 
 const drawerWidth = 240; 
 
@@ -122,10 +122,9 @@ export default function MiniDrawer() {
 
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
-    { name: "นักศึกษา", icon: <AccountCircleIcon />, path: "/students" },
-    { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
-    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
     { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/addcourse" },
+    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule" },
+    { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
   ];
 
   useEffect(() => {
@@ -220,14 +219,14 @@ export default function MiniDrawer() {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              {/* <Route exact path="/students" component={Students} />
+              {/*
               <Route exact path="/registrars" component={Registrars} />
               <Route exact path="/withdrawal" component={Withdrawals} />
               <Route exact path="/withdrawal/create" component={WithdrawalCreate} /> */}
               <Route exact path="/addcourse" component={AddCourses} />
               <Route exact path="/addcourse/create" component={AddCourseCreate} />
-              {/* <Route exact path="/examschedule" component={ExamSchedules} />
-              <Route exact path="/examschedule/create" component={ExamScheduleCreate} /> */}
+              <Route exact path="/examschedule" component={ExamSchedules} />
+              <Route exact path="/examschedule/create" component={ExamScheduleCreate} /> 
             </Switch>
           </div>
         </main>

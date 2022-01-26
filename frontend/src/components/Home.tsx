@@ -24,27 +24,9 @@ function Home() {
     <div>
       <Container className={classes.container} maxWidth="md">
         <h1 style={{ textAlign: "center" }}>ระบบลงทะเบียนเรียน</h1>
-        <h3> </h3>
 
-        <Grid item xs={12}>
-          <Button
-            component={RouterLink}
-            style={{ float: "left" }}
-            to="/students"
-            variant="contained"
-            color="inherit"
-          >
-            นักศึกษา
-          </Button><Button
-            component={RouterLink}
-            style={{ float: "right" }}
-            to="/registrars"
-            variant="contained"
-            color="inherit"
-          >
-            ฝ่ายทะเบียน
-          </Button>
-        </Grid>
+        <h3> ยินดีต้อนรับสู่ระบบลงทะเบียนเรียน </h3>
+        
       </Container>
     </div >
   );
