@@ -43,3 +43,10 @@ import (
 		ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
 		AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
 	}
+
+	type Program struct {
+		gorm.Model
+		Programname string
+	
+		AddCourse []AddCourse `gorm:"foreignKey:ProgramID"`
+	}
