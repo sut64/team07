@@ -32,4 +32,20 @@ import (
 	
 		SemesterID *uint
 		Semester   Semester `gorm:"references:id"`
+
+		type Course struct {
+			gorm.Model
+			Coursename   string
+			Coursenumber int32
+		
+			ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
+			AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
+		}
+		
+		type Program struct {
+			gorm.Model
+			Programname string
+		
+			AddCourse []AddCourse `gorm:"foreignKey:ProgramID"`
+		}
 	}
