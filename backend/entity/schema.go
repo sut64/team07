@@ -62,3 +62,19 @@ import (
 	
 		AddCourse   []AddCourse  `gorm:"foreignKey:TeacherID"`
 	}
+
+	type AddCourse struct {
+		gorm.Model
+		Credit   int16
+		DayTime  string
+		SaveTime time.Time
+	
+		CourseID *uint
+		Course   Course `gorm:"references:id"`
+	
+		ProgramID *uint
+		Program   Program `gorm:"references:id"`
+	
+		TeacherID *uint
+		Teacher   Teacher `gorm:"references:id"`
+	}
