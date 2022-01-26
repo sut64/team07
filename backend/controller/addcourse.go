@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	"github.com/PhatSut/demo/entity"
+	"github.com/sut64/team07/entity"
 	"github.com/gin-gonic/gin"
 )
 
