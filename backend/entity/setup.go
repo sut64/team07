@@ -1,8 +1,8 @@
 package entity
 
 import (
-//	"time"
 
+	//"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -19,14 +19,14 @@ func SetupDatabase() {
     panic("failed to connect database")
   }
   database.AutoMigrate(
-//  &Teacher{},
+    &Teacher{},
 //	&Student{},
 	&Semester{},
 	&ExamType{},
-//	&Program{},
-//	&Course{},
+	&Program{},
+	&Course{},
 	&ExamSchedule{},
-//	&AddCourse{},
+	&AddCourse{},
 //	&RequestStatus{},
 //	&Petition{},
 //	&Registrar{},
@@ -36,32 +36,39 @@ func SetupDatabase() {
 
   //password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 
-/*  	registrar1 := Registrar{
+	/*registrar1 := Registrar{
 		ID_registrar: "R5678912",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
+		Prefix:       "Miss",
+		Name:         "Fasai Jangloei",
+		Email:        "fj@gmail.com",
+		Password:     string(password),
 	}
 	db.Model(&Registrar{}).Create(&registrar1)
+
 	registrar2 := Registrar{
 		ID_registrar: "R2034567",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
+		Prefix:       "Mr.",
+		Name:         "Sompong Naja",
+		Email:        "sn@gmail.com",
+		Password:     string(password),
 	}
 	db.Model(&Registrar{}).Create(&registrar2)
+
 	registrar3 := Registrar{
-		ID_registrar: "R",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
+		ID_registrar: "R1234567",
+		Prefix:       "Mr.",
+		Name:         "Meta  Kunwat",
+		Email:        "mk@gmail.com",
+		Password:     string(password),
 	}
 	db.Model(&Registrar{}).Create(&registrar3)
+
 	registrar4 := Registrar{
-		ID_registrar: "R",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
+		ID_registrar: "R2345678",
+		Prefix:       "Mr.",
+		Name:         "Apiwat Sompung",
+		Email:        "ap@gmail.com",
+		Password:     string(password),
 	}
 	db.Model(&Registrar{}).Create(&registrar4)
 
@@ -153,7 +160,7 @@ func SetupDatabase() {
 		Prefix: "Mr.",
 		Major: "CPE",
 	}
-	db.Model(&Teacher{}).Create(&teacher4)
+	db.Model(&Teacher{}).Create(&teacher4)*/
 
   
 	//Course Data
@@ -196,7 +203,7 @@ func SetupDatabase() {
 	program2 :=Program{
 		Programname: "International Program",
 	}
-	db.Model(&Program{}).Create(&program2) */
+	db.Model(&Program{}).Create(&program2) 
 	
 	//Semester Data
 	Semester1 :=Semester{
@@ -226,10 +233,10 @@ func SetupDatabase() {
 	status3 := RequestStatus{
 		Status: "ดำเนินการสำเร็จแล้ว",
 	}
-	db.Model(&RequestStatus{}).Create(&status3)
+	db.Model(&RequestStatus{}).Create(&status3)*/
 
 	//
-	claim1 := Petition{
+	/*claim1 := Petition{
 		Claim: "เกินกว่าหน่วยกิตกำหนด",
 	}
 	db.Model(&Petition{}).Create(&claim1)
@@ -282,59 +289,4 @@ func SetupDatabase() {
 	}
 	db.Model(&Grades{}).Create(&grade8)			
 	*/
-
-	// AddCourse data
-	/*addcourse1 := AddCourse{
-		Course: course1,
-		Program: program1,
-		Teacher: teacher1,
-		Credit: 4,
-		DayTime: "TUE 13:00-15:00",
-		SaveTime: time.Now(),
-	}
-	db.Model(&AddCourse{}).Create(&addcourse1)
-	addcourse2 := AddCourse{
-		Course: course3,
-		Program: program1,
-		Teacher: teacher3,
-		Credit: 4,
-		DayTime: "THU 10:00-12:00",
-		SaveTime: time.Now(),
-	}
-	db.Model(&AddCourse{}).Create(&addcourse2)
-	addcourse3 := AddCourse{
-		Course: course2,
-		Program: program1,
-		Teacher: teacher4,
-		Credit: 4,
-		DayTime: "FRI 13:00-16:00",
-		SaveTime: time.Now(),
-	}
-	db.Model(&AddCourse{}).Create(&addcourse3)*/
-
-	// ExamSchedule data
-	exam1 := ExamSchedule{
-		Semester: Semester1,
-		AcamedicYear: 2564,
-		ExamType: type2,
-//		Course: course2,
-		RoomExam: "B5204",
-	}
-	db.Model(&ExamSchedule{}).Create(&exam1)
-	exam2 := ExamSchedule{
-		Semester: Semester2,
-		AcamedicYear: 2564,
-		ExamType: type2,
-//		Course: course2,
-		RoomExam: "B1125",
-	}
-	db.Model(&ExamSchedule{}).Create(&exam2)
-	exam3 := ExamSchedule{
-		Semester: Semester3,
-		AcamedicYear: 2564,
-		ExamType: type2,
-//		Course: course2,
-		RoomExam: "B1122",
-	}
-	db.Model(&ExamSchedule{}).Create(&exam3)
 }
