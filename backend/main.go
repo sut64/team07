@@ -103,7 +103,7 @@ func main() {
 			protected.DELETE("/requestexams/:id", controller.DeleteRequestExam)
 
 			// Petition Routes
-			/*protected.GET("/petitions", controller.ListPetitions)
+			protected.GET("/petitions", controller.ListPetitions)
 			protected.GET("/petition/:id", controller.GetPetition)
 			protected.POST("/petitions", controller.CreatePetition)
 			protected.PATCH("/petitions", controller.UpdatePetition)
@@ -114,7 +114,7 @@ func main() {
 			protected.GET("/recordpetition/:id", controller.GetRecordPetition)
 			protected.POST("/record_petitions", controller.CreateRecordPetition)
 			protected.PATCH("/record_petitions", controller.UpdateRecordPetition)
-			protected.DELETE("/recordpetitions/:id", controller.DeleteRecordPetition)*/
+			protected.DELETE("/recordpetitions/:id", controller.DeleteRecordPetition)
 
 			// Grades Routes
 			protected.GET("/grades", controller.ListGrades)
