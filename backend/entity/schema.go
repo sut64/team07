@@ -18,7 +18,7 @@ type Student struct {
 
 	Withdrawals    []Withdrawal     `gorm:"foreignKey:StudentID"`
 	RequestExams   []RequestExam    `gorm:"foreignKey:StudentID"`
-	RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
+	//RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
 	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
 }
 
