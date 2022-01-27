@@ -59,7 +59,7 @@ function ExamSchedules() {
 
   return (
     <div>
-      <Container className={classes.container} maxWidth="md">
+      <Container className={classes.container} maxWidth="lg">
         <Box display="flex">
           <Box flexGrow={2}>
             <Typography
@@ -86,19 +86,19 @@ function ExamSchedules() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="12%">
                   ภาคการศึกษา
                 </TableCell>
                 <TableCell align="center" width="10%">
                   ปีการศึกษา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="15%">
                   ประเภทการจัดสอบ
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="17%">
                   ชื่อรายวิชา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="8%">
                   ห้องสอบ
                 </TableCell>
                 <TableCell align="center" width="15%">
