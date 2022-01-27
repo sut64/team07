@@ -13,4 +13,4 @@ export interface AddCoursesInterface {
     Program: ProgramsInterface,
     TeacherID: number,
     Teacher: TeachersInterface,
-  }
+  } 
