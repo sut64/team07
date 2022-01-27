@@ -6,35 +6,37 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
- 
+
 var db *gorm.DB
- 
+
 func DB() *gorm.DB {
 	return db
 }
- 
-func SetupDatabase() {
-  database, err := gorm.Open(sqlite.Open("se-g07.db"), &gorm.Config{})
-  if err != nil {
-    panic("failed to connect database")
-  }
-  database.AutoMigrate(
-    	&Teacher{},
-//	&Student{},
-	&Semester{},
-	&ExamType{},
-	&Program{},
-	&Course{},
-	&ExamSchedule{},
-	&AddCourse{},
-//	&RequestStatus{},
-//	&Petition{},
-	&Registrar{},
-  )
- 
-  db = database
 
-  password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+func SetupDatabase() {
+	database, err := gorm.Open(sqlite.Open("se-g07.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+	database.AutoMigrate(
+		&Teacher{},
+		&Student{},
+		&Semester{},
+		&ExamType{},
+		&Program{},
+		&Course{},
+		&ExamSchedule{},
+		&AddCourse{},
+		//	&RequestStatus{},
+		//	&Petition{},
+		&Registrar{},
+		&IncreaseGrades{},
+		&Grades{},
+	)
+
+	db = database
+
+	password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 
 	registrar1 := Registrar{
 		ID_registrar: "R5678912",
@@ -72,151 +74,175 @@ func SetupDatabase() {
 	}
 	db.Model(&Registrar{}).Create(&registrar4)
 
-	/*student1 := Student{
+	registrar5 := Registrar{
+		ID_registrar: "R5901258",
+		Prefix:       "Mr.",
+		Name:         "Jeeninee Khuptawuttinun",
+		Email:        "Jeeninee@gmail.com",
+		Password:     string(password),
+	}
+	db.Model(&Registrar{}).Create(&registrar5)
+
+	student1 := Student{
 		ID_student: "B6202385",
-		Prefix: "Miss",
-		Name: "Phatcha Sisuwo",
-		Major: "CPE",
-		Year: 3,
-		Email: "phatcha@gmail.com",
-		Password: "",
+		Prefix:     "Miss",
+		Name:       "Phatcha Sisuwo",
+		Major:      "CPE",
+		Year:       3,
+		Email:      "phatcha@gmail.com",
+		Password:   string(password),
 	}
 	db.Model(&Student{}).Create(&student1)
+
 	student2 := Student{
 		ID_student: "B6202743",
-		Prefix: "Miss",
-		Name: "Narudee Arunno",
-		Major: "CPE",
-		Year: 3,
-		Email: "narudee@gmail.com",
-		Password: "",
+		Prefix:     "Miss",
+		Name:       "Narudee Arunno",
+		Major:      "CPE",
+		Year:       3,
+		Email:      "narudee@gmail.com",
+		Password:   string(password),
 	}
 	db.Model(&Student{}).Create(&student2)
+
 	student3 := Student{
 		ID_student: "B6214449",
-		Prefix: "Miss",
-		Name: "Suwanan Thamsui",
-		Major: "CPE",
-		Year: 3,
-		Email: "suwanan@gmail.com",
-		Password: "",
+		Prefix:     "Miss",
+		Name:       "Suwanan Thamsui",
+		Major:      "CPE",
+		Year:       3,
+		Email:      "suwanan@gmail.com",
+		Password:   string(password),
 	}
 	db.Model(&Student{}).Create(&student3)
+
 	student4 := Student{
 		ID_student: "B6230760",
-		Prefix: "Miss",
-		Name: "Patnarin Aiewchoei",
-		Major: "CPE",
-		Year: 3,
-		Email: "patnarin@gmail.com",
-		Password: "",
+		Prefix:     "Miss",
+		Name:       "Patnarin Aiewchoei",
+		Major:      "CPE",
+		Year:       3,
+		Email:      "patnarin@gmail.com",
+		Password:   string(password),
 	}
 	db.Model(&Student{}).Create(&student4)
+
 	student5 := Student{
 		ID_student: "B5924615",
-		Prefix: "Mr.",
-		Name: "Patnarin Aiewchoei",
-		Major: "CPE",
-		Year: 3,
-		Email: "Pawarit Praneetponkrang",
-		Password: "",
+		Prefix:     "Mr.",
+		Name:       "Pawarit Praneetponkrang",
+		Major:      "CPE",
+		Year:       6,
+		Email:      "pawarit@gmail.com",
+		Password:   string(password),
 	}
-	db.Model(&Student{}).Create(&student5)*/ 
+	db.Model(&Student{}).Create(&student5)
 
-	
+	student6 := Student{
+		ID_student: "B5901258",
+		Prefix:     "Miss",
+		Name:       "Khuptawuttinun",
+		Major:      "CPE",
+		Year:       6,
+		Email:      "Khuptawuttinun@gmail.com",
+		Password:   string(password),
+	}
+	db.Model(&Student{}).Create(&student6)
+
 	teacher1 := Teacher{
 		ID_teacher: "T000001",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ",
-		Email: "chanwit@gmail.com",
-		Password: "",
-		Prefix: "Mr.",
-		Major: "CPE",
+		Name:       "ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ",
+		Email:      "chanwit@gmail.com",
+		Password:   string(password),
+		Prefix:     "Mr.",
+		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher1)
+
 	teacher2 := Teacher{
 		ID_teacher: "T0023581",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
-		Email: "nuntawut@gmail.com",
-		Password: "",
-		Prefix: "Mr.",
-		Major: "CPE",
+		Name:       "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
+		Email:      "nuntawut@gmail.com",
+		Password:   string(password),
+		Prefix:     "Mr.",
+		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher2)
+
 	teacher3 := Teacher{
 		ID_teacher: "T0157690",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
-		Email: "sarunya@gmail.com",
-		Password: "",
-		Prefix: "Miss",
-		Major: "CPE",
+		Name:       "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
+		Email:      "sarunya@gmail.com",
+		Password:   string(password),
+		Prefix:     "Miss",
+		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher3)
+
 	teacher4 := Teacher{
 		ID_teacher: "T1578952",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
-		Email: "paramate@gmail.com",
-
-		Password: "",
-		Prefix: "Mr.",
-		Major: "CPE",
+		Name:       "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
+		Email:      "paramate@gmail.com",
+		Password:   string(password),
+		Prefix:     "Mr.",
+		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher4)
 
-  
 	//Course Data
 	course1 := Course{
-		Coursename: "SOFTWARE ENGINEERING",
+		Coursename:   "SOFTWARE ENGINEERING",
 		Coursenumber: 523332,
 	}
 	db.Model(&Course{}).Create(&course1)
 	course2 := Course{
-		Coursename: "COMPUTER AND COMMUNICATION",
+		Coursename:   "COMPUTER AND COMMUNICATION",
 		Coursenumber: 523352,
 	}
 	db.Model(&Course{}).Create(&course2)
 	course3 := Course{
-		Coursename: "OPERATING SYSTEMS",
+		Coursename:   "OPERATING SYSTEMS",
 		Coursenumber: 523354,
 	}
 	db.Model(&Course{}).Create(&course3)
 	course4 := Course{
-		Coursename: "System Analysis and Design",
+		Coursename:   "System Analysis and Design",
 		Coursenumber: 523331,
 	}
 	db.Model(&Course{}).Create(&course4)
 	course5 := Course{
-		Coursename: "DATABASE SYSTEMS",
+		Coursename:   "DATABASE SYSTEMS",
 		Coursenumber: 523211,
 	}
 	db.Model(&Course{}).Create(&course5)
 	course6 := Course{
-		Coursename: "COMPUTER STATISTICS",
+		Coursename:   "COMPUTER STATISTICS",
 		Coursenumber: 523301,
 	}
 	db.Model(&Course{}).Create(&course6)
 
 	// Program data
-	program1 :=Program{
+	program1 := Program{
 		Programname: "Thai Program",
 	}
-	db.Model(&Program{}).Create(&program1) 
-	program2 :=Program{
+	db.Model(&Program{}).Create(&program1)
+	program2 := Program{
 		Programname: "International Program",
 	}
-	db.Model(&Program{}).Create(&program2) 
-	
+	db.Model(&Program{}).Create(&program2)
+
 	//Semester Data
-	Semester1 :=Semester{
+	Semester1 := Semester{
 		Semester: "ภาคการศึกษาที่ 1",
 	}
 	db.Model(&Semester{}).Create(&Semester1)
 
-	Semester2 :=Semester{
+	Semester2 := Semester{
 		Semester: "ภาคการศึกษาที่ 2",
 	}
 	db.Model(&Semester{}).Create(&Semester2)
 
-	Semester3 :=Semester{
+	Semester3 := Semester{
 		Semester: "ภาคการศึกษาที่ 3",
 	}
 	db.Model(&Semester{}).Create(&Semester3)
@@ -243,7 +269,7 @@ func SetupDatabase() {
 	claim2 := Petition{
 		Claim: "ต่ำกว่าหน่วยกิตกำหนด",
 	}
-	db.Model(&Petition{}).Create(&claim2)*/	
+	db.Model(&Petition{}).Create(&claim2)*/
 
 	// ExamType Data
 	type1 := ExamType{
@@ -254,8 +280,7 @@ func SetupDatabase() {
 		Type: "ปลายภาค",
 	}
 	db.Model(&ExamType{}).Create(&type2)
-	
-	/*
+
 	grade1 := Grades{
 		grade: "A",
 	}
@@ -267,19 +292,19 @@ func SetupDatabase() {
 	grade3 := Grades{
 		grade: "B",
 	}
-	db.Model(&Grades{}).Create(&grade3)	
+	db.Model(&Grades{}).Create(&grade3)
 	grade4 := Grades{
 		grade: "C+",
 	}
-	db.Model(&Grades{}).Create(&grade4)	
+	db.Model(&Grades{}).Create(&grade4)
 	grade5 := Grades{
 		grade: "C",
 	}
-	db.Model(&Grades{}).Create(&grade5)	
+	db.Model(&Grades{}).Create(&grade5)
 	grade6 := Grades{
 		grade: "D+",
 	}
-	db.Model(&Grades{}).Create(&grade6)	
+	db.Model(&Grades{}).Create(&grade6)
 	grade7 := Grades{
 		grade: "D",
 	}
@@ -287,6 +312,6 @@ func SetupDatabase() {
 	grade8 := Grades{
 		grade: "F",
 	}
-	db.Model(&Grades{}).Create(&grade8)			
-	*/
+	db.Model(&Grades{}).Create(&grade8)
+
 }
