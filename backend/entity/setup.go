@@ -26,12 +26,13 @@ func SetupDatabase() {
 		&Course{},
 		&ExamSchedule{},
 		&AddCourse{},
-		//	&Petition{},
+		&Petition{},
 		&Registrar{},
 		&IncreaseGrades{},
 		&Grades{},
 		&RequestStatus{},
 		&RequestExam{},
+		&RecordPetition{},
 	)
 
 	db = database
@@ -263,14 +264,14 @@ func SetupDatabase() {
 	db.Model(&RequestStatus{}).Create(&status3)*/
 
 	//
-	/*claim1 := Petition{
+	claim1 := Petition{
 		Claim: "เกินกว่าหน่วยกิตกำหนด",
 	}
 	db.Model(&Petition{}).Create(&claim1)
 	claim2 := Petition{
 		Claim: "ต่ำกว่าหน่วยกิตกำหนด",
 	}
-	db.Model(&Petition{}).Create(&claim2)*/
+	db.Model(&Petition{}).Create(&claim2)
 
 	// ExamType Data
 	type1 := ExamType{
