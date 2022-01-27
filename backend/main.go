@@ -32,11 +32,11 @@ func main() {
 			protected.DELETE("/teachers/:id", controller.DeleteTeacher)
 
 			// Registrar Routes
-			/**protected.GET("/registrars", controller.ListRegistrar)
+			protected.GET("/registrars", controller.ListRegistrar)
 			protected.GET("/registrar/:id", controller.GetRegistrar)
 			protected.POST("/registrar", controller.CreateRegistrar)
 			protected.PATCH("/registrars", controller.UpdateRegistrar)
-			protected.DELETE("/registrars/:id", controller.DeleteRegistrar)*/
+			protected.DELETE("/registrars/:id", controller.DeleteRegistrar)
 
 			// Semester Routes
 			protected.GET("/semesters", controller.ListSemesters)
@@ -86,12 +86,53 @@ func main() {
 			protected.GET("/withdrawal/:id", controller.GetWithdrwal)
 			protected.POST("/withdrawal", controller.CreateWithdrawal)
 			protected.PATCH("/withdrawals", controller.UpdateWithdrawal)
-			protected.DELETE("/withdrawals/:id", controller.DeleteWithdrawal)*/
+			protected.DELETE("/withdrawals/:id", controller.DeleteWithdrawal)
+
+			// RequestStatus Routes
+			protected.GET("/requeststatuses", controller.ListRequestStatuses)
+			protected.GET("/requeststatus/:id", controller.GetRequestStatus)
+			protected.POST("/requeststatuses", controller.CreateRequestStatus)
+			protected.PATCH("/requeststatuses", controller.UpdateRequestStatus)
+			protected.DELETE("/requeststatuses/:id", controller.DeleteRequestStatus)
+
+			// RequestExam Routes
+			protected.GET("/request_exams", controller.ListRequestExams)
+			protected.GET("/requestexam/:id", controller.GetRequestExam)
+			protected.POST("/request_exams", controller.CreateRequestExam)
+			protected.PATCH("/request_exams", controller.UpdateRequestExam)
+			protected.DELETE("/requestexams/:id", controller.DeleteRequestExam)
+
+			// Petition Routes
+			protected.GET("/petitions", controller.ListPetitions)
+			protected.GET("/petition/:id", controller.GetPetition)
+			protected.POST("/petitions", controller.CreatePetition)
+			protected.PATCH("/petitions", controller.UpdatePetition)
+			protected.DELETE("/petitions/:id", controller.DeletePetition)
+
+			// RecordPetition Routes
+			protected.GET("/record_petitions", controller.ListRecordPetitions)
+			protected.GET("/recordpetition/:id", controller.GetRecordPetition)
+			protected.POST("/record_petitions", controller.CreateRecordPetition)
+			protected.PATCH("/record_petitions", controller.UpdateRecordPetition)
+			protected.DELETE("/recordpetitions/:id", controller.DeleteRecordPetition)
+
+			// Grades Routes
+			protected.GET("/grades", controller.ListGrades)
+			protected.GET("/grades/:id", controller.GetGrades)
+			protected.POST("/grades", controller.CreateGrades)
+			protected.PATCH("/grades", controller.UpdateGrades)
+			protected.DELETE("/grades/:id", controller.DeleteGrades)
+
+			// IncreaseGrades Routes
+			protected.GET("/increasegrades", controller.ListIncreaseGrades)
+			protected.GET("/increasegrade/:id", controller.GetIncreaseGrades)
+			protected.POST("/increasegrades", controller.CreateIncreaseGrades)
+			protected.PATCH("/increasegrades", controller.UpdateIncreaseGrades)
+			protected.DELETE("/increasegrades/:id", controller.DeleteSemester)*/
 
 		}
 	}
 
-	// Student Routes
 
 	// Authentication Routes
 	r.POST("/student/login", controller.LoginStudent)
