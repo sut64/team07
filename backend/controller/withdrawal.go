@@ -15,36 +15,36 @@ func CreateWithdrawal(c *gin.Context) {
 	var semesters entity.Semester
 	var teachers entity.Teacher
 
-	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 8 จะถูก bind เข้าตัวแปร withdrawals
+	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 9 จะถูก bind เข้าตัวแปร withdrawals
 	if err := c.ShouldBindJSON(&withdrawals); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// 9: ค้นหา student ด้วย id
+	// 10: ค้นหา student ด้วย id
 	if tx := entity.DB().Where("id = ?", withdrawals.StudentID).First(&students); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "student not found"})
 		return
 	}
 
-	// 10: ค้นหา course ด้วย id
+	// 11: ค้นหา course ด้วย id
 	if tx := entity.DB().Where("id = ?", withdrawals.CourseID).First(&courses); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "course not found"})
 		return
 	}
 
-	// 11: ค้นหา teacher ด้วย id
+	// 12: ค้นหา teacher ด้วย id
 	if tx := entity.DB().Where("id = ?", withdrawals.TeacherID).First(&teachers); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "teacher not found"})
 		return
 	}
 
-	// 12: ค้นหา semester ด้วย id
+	// 13: ค้นหา semester ด้วย id
 	if tx := entity.DB().Where("id = ?", withdrawals.SemesterID).First(&semesters); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "semester not found"})
 		return
 	}
-	// 13: สร้าง Withdrawal
+	// 14: สร้าง Withdrawal
 	wd := entity.Withdrawal{
 		Student:        students,                   // โยงความสัมพันธ์กับ Entity Student
 		Course:         courses,                    // โยงความสัมพันธ์กับ Entity Course
@@ -56,14 +56,7 @@ func CreateWithdrawal(c *gin.Context) {
 		WithdrawalTime: withdrawals.WithdrawalTime, // ตั้งค่าฟิลด์ WihdrawalTime
 	}
 
-	/*
-		// แทรกการ validate controller
-		if _, err := govalidator.ValidateStruct(withdrawals); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		} */
-
-	// 13: บันทึก
+	// 15: บันทึก
 	if err := entity.DB().Create(&wd).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
