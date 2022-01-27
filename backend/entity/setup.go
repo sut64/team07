@@ -1,8 +1,7 @@
 package entity
 
 import (
-
-	//"golang.org/x/crypto/bcrypt"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -27,11 +26,12 @@ func SetupDatabase() {
 		&Course{},
 		&ExamSchedule{},
 		&AddCourse{},
-		//	&RequestStatus{},
 		//	&Petition{},
 		&Registrar{},
 		&IncreaseGrades{},
 		&Grades{},
+		&RequestStatus{},
+		&RequestExam{},
 	)
 
 	db = database
@@ -247,12 +247,12 @@ func SetupDatabase() {
 	}
 	db.Model(&Semester{}).Create(&Semester3)
 
-	//
-	/*status1 := RequestStatus{
+	//RequestStatus Data
+	status1 := RequestStatus{
 		Status: "รอดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status1)
-	status2 := RequestStatus{
+	/*status2 := RequestStatus{
 		Status: "กำลังดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status2)
