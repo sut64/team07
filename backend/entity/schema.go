@@ -124,7 +124,7 @@ import (
 		Semester   Semester `gorm:"references:id"`
 	}
 
-	/*type Withdrawal struct {
+	type Withdrawal struct {
 		gorm.Model
 	
 		StudentID *uint
@@ -140,11 +140,12 @@ import (
 		Semester   Semester `gorm:"references:id" valid:"-"`
 	
 		YearTime       int
-		RemainCredit   int    // `valid:"int~RemainCredit must be int"`
-		Reason         string //`valid:"required~Reason cannot be blank"`
+		RemainCredit   int    
+		Reason         string 
 		WithdrawalTime time.Time
 	}
-	
+
+	/*
 	type RequestExam struct {
 		gorm.Model
 	
