@@ -148,7 +148,7 @@ type Withdrawal struct {
 	WithdrawalTime time.Time
 }
 
-/*type RequestExam struct {
+type RequestExam struct {
 	gorm.Model
 
 	StudentID *uint
@@ -171,7 +171,7 @@ type Withdrawal struct {
 	RequestStatus   RequestStatus `gorm:"references:id"`
 
 	RequestTime time.Time
-}*/
+}
 
 /*type RecordPetition struct {
 	gorm.Model
