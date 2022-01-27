@@ -290,7 +290,7 @@ function ExamScheduleCreate(this: any) {
                 </option>
                 {Courses.map((item: CoursesInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Coursename}
+                    {item.Coursenumber} - {item.Coursename}
                   </option>
                 ))}
               </Select>
