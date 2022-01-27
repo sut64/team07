@@ -18,21 +18,28 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 
-import HomeIcon from "@material-ui/icons/Home";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import EventRepeatTwoToneIcon from '@mui/icons-material/EventRepeatTwoTone';
+import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import EventNoteTwoToneIcon from '@mui/icons-material/EventNoteTwoTone';
+import BookmarkRemoveTwoToneIcon from '@mui/icons-material/BookmarkRemoveTwoTone';
+import CreditScoreTwoToneIcon from '@mui/icons-material/CreditScoreTwoTone';
+import AutoStoriesTwoToneIcon from '@mui/icons-material/AutoStoriesTwoTone';
+import SubjectTwoToneIcon from '@mui/icons-material/SubjectTwoTone';
 
 import Home from "./components/Home";
 import SignIn from "./components/Signin";
-//import Students from "./components/Student";
-//import Registrars from "./components/Registrar";
-//import Withdrawals from "./components/Withdrawal";
-//import WithdrawalCreate from "./components/WithdrawalCreate";
+import Registrars from "./components/Registrar";
+import Withdrawals from "./components/Withdrawal";
+import WithdrawalCreate from "./components/WithdrawalCreate";
 import AddCourses from "./components/AddCourses";
 import AddCourseCreate from "./components/AddCourseCreate";
-import EventNoteIcon from '@mui/icons-material/EventNote';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ExamScheduleCreate from "./components/ExamScheduleCreate";
 import ExamSchedules from "./components/ExamSchedule";
+import RequestExams from "./components/RequestExams";
+import RequestExamCreate from "./components/RequestExamCreate";
+import RecordPetition from "./components/RecordPetition";
+import IncreaseGrades from "./components/IncreaseGrades";
+import IncreaseGradesCreate from "./components/IncreaseGradesCreate";
 
 const drawerWidth = 240; 
 
@@ -121,10 +128,14 @@ export default function MiniDrawer() {
   }; 
 
   const menu = [
-    { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
-    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/addcourse" },
-    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule" },
-    { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
+    { name: "หน้าแรก", icon: <HomeTwoToneIcon color="primary"/>, path: "/" },
+    { name: "เพิ่มรายวิชา", icon: <AutoStoriesTwoToneIcon color="primary" />, path: "/addcourse" },
+    { name: "เพิ่มตารางสอบ", icon: <EventNoteTwoToneIcon color="primary" />, path: "/examschedule" },
+    { name: "คำร้องขอลงทะเบียนเรียนเกินต่ำกว่าหน่วยกิตที่กำหนด", icon: <SubjectTwoToneIcon color="primary" />, path: "/RecordPetition" },
+    { name: "เพิ่มคำร้องขอสอบซ้ำซ้อน", icon: <EventRepeatTwoToneIcon color="primary"/>, path: "/request_exams" },
+    { name: "ขอถอนรายวิชา", icon: <BookmarkRemoveTwoToneIcon color="primary"/>, path: "/withdrawal" },
+    { name: "เพิ่มผลการเรียนนักศึกษา", icon: <CreditScoreTwoToneIcon color="primary" />, path: "/Increasegrade" },
+
   ];
 
   useEffect(() => {
@@ -219,14 +230,19 @@ export default function MiniDrawer() {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              {/*
               <Route exact path="/registrars" component={Registrars} />
               <Route exact path="/withdrawal" component={Withdrawals} />
-              <Route exact path="/withdrawal/create" component={WithdrawalCreate} /> */}
+              <Route exact path="/withdrawal/create" component={WithdrawalCreate} />
               <Route exact path="/addcourse" component={AddCourses} />
               <Route exact path="/addcourse/create" component={AddCourseCreate} />
               <Route exact path="/examschedule" component={ExamSchedules} />
-              <Route exact path="/examschedule/create" component={ExamScheduleCreate} /> 
+              <Route exact path="/examschedule/create" component={ExamScheduleCreate} />
+              <Route exact path="/request_exams" component={RequestExams} />
+              <Route exact path="/request_exam/create" component={RequestExamCreate}/>
+              <Route exact path="/RecordPetition" component={RecordPetition} />
+              <Route exact path="/Increasegrade" component={IncreaseGrades} />
+              <Route exact path="/Increasegrade/create" component={IncreaseGradesCreate} />
+
             </Switch>
           </div>
         </main>
