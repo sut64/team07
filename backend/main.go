@@ -18,11 +18,11 @@ func main() {
 		protected := api.Use(middlewares.Authorizes())
 		{
 			// Student Routes
-			/*protected.GET("/students", controller.ListStudents)
+			protected.GET("/students", controller.ListStudents)
 			protected.GET("/students/:id", controller.ListStudent)
 			protected.GET("/student/:id", controller.GetStudent)
 			protected.PATCH("/students", controller.UpdateStudent)
-			protected.DELETE("/students/:id", controller.DeleteStudent)*/
+			protected.DELETE("/students/:id", controller.DeleteStudent)
 
 			// Teaher Routes
 			protected.GET("/teachers", controller.ListTeacher)
@@ -81,7 +81,7 @@ func main() {
 			protected.DELETE("/programs/:id", controller.DeleteProgram)
 
 			// Withdrwals Routes
-			/*protected.GET("/withdrawals", controller.ListWithdrawals)
+			protected.GET("/withdrawals", controller.ListWithdrawals)
 			protected.GET("/withdrawals/:id", controller.ListWithdrawal)
 			protected.GET("/withdrawal/:id", controller.GetWithdrwal)
 			protected.POST("/withdrawal", controller.CreateWithdrawal)
@@ -103,7 +103,7 @@ func main() {
 			protected.DELETE("/requestexams/:id", controller.DeleteRequestExam)
 
 			// Petition Routes
-			protected.GET("/petitions", controller.ListPetitions)
+			/*protected.GET("/petitions", controller.ListPetitions)
 			protected.GET("/petition/:id", controller.GetPetition)
 			protected.POST("/petitions", controller.CreatePetition)
 			protected.PATCH("/petitions", controller.UpdatePetition)
@@ -114,7 +114,7 @@ func main() {
 			protected.GET("/recordpetition/:id", controller.GetRecordPetition)
 			protected.POST("/record_petitions", controller.CreateRecordPetition)
 			protected.PATCH("/record_petitions", controller.UpdateRecordPetition)
-			protected.DELETE("/recordpetitions/:id", controller.DeleteRecordPetition)
+			protected.DELETE("/recordpetitions/:id", controller.DeleteRecordPetition)*/
 
 			// Grades Routes
 			protected.GET("/grades", controller.ListGrades)
@@ -128,11 +128,10 @@ func main() {
 			protected.GET("/increasegrade/:id", controller.GetIncreaseGrades)
 			protected.POST("/increasegrades", controller.CreateIncreaseGrades)
 			protected.PATCH("/increasegrades", controller.UpdateIncreaseGrades)
-			protected.DELETE("/increasegrades/:id", controller.DeleteSemester)*/
+			protected.DELETE("/increasegrades/:id", controller.DeleteSemester)
 
 		}
 	}
-
 
 	// Authentication Routes
 	r.POST("/student/login", controller.LoginStudent)
@@ -141,7 +140,6 @@ func main() {
 	// Run the server
 	r.Run()
 }
-
 
 func CORSMiddleware() gin.HandlerFunc {
 
