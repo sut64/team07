@@ -162,7 +162,7 @@ function ExamScheduleCreate(this: any) {
       ExamTypeID: convertType(ExamSchedule.ExamTypeID),
       CourseID: convertType(ExamSchedule.CourseID),
       RoomExam: ExamSchedule.RoomExam ?? "",
-      DateExam: selectedDate,
+      ExamDate: selectedDate,
       StartTime: selectTimeStart,
       EndTime: selectedTimeend,
     };
@@ -315,7 +315,7 @@ function ExamScheduleCreate(this: any) {
               <p>วันที่สอบ</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
-                  name="DateExam"
+                  name="ExamDate"
                   value={selectedDate}
                   onChange={handleDateChange}
                   label="กรุณาเลือกวันสอบ"

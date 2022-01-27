@@ -22,23 +22,24 @@ func CreateExamSchedule(c *gin.Context) {
 	}
 
 
-	// 9: ค้นหา Course ด้วย id
-	if tx := entity.DB().Where("id = ?", ExamSchedule.CourseID).First(&Course); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
-		return
-	}
-
-	// 10: ค้นหา Semester ด้วย id
+	// 9: ค้นหา Semester ด้วย id
 	if tx := entity.DB().Where("id = ?", ExamSchedule.SemesterID).First(&Semester); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Semester not found"})
 		return
 	}
 
-	// 11: ค้นหา ExamType ด้วย id
+	// 10: ค้นหา ExamType ด้วย id
 	if tx := entity.DB().Where("id = ?", ExamSchedule.ExamTypeID).First(&ExamType); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ExamType not found"})
 		return
 	}
+
+	// 11: ค้นหา Course ด้วย id
+	if tx := entity.DB().Where("id = ?", ExamSchedule.CourseID).First(&Course); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
+		return
+	}
+
 	// 12: สร้าง ExamSchedule
 	pm := entity.ExamSchedule{
 		Semester: Semester,       // โยงความสัมพันธ์กับ Entity Semester
@@ -46,7 +47,7 @@ func CreateExamSchedule(c *gin.Context) {
 		ExamType:  ExamType,        // โยงความสัมพันธ์กับ Entity ExamType
 		AcademicYear: ExamSchedule.AcademicYear,
 		RoomExam: ExamSchedule.RoomExam,
-		DateExam: ExamSchedule.DateExam,
+		ExamDate: ExamSchedule.ExamDate,
 		StartTime: ExamSchedule.StartTime,
 		EndTime: ExamSchedule.EndTime,
 	}

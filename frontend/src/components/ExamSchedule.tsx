@@ -120,7 +120,7 @@ function ExamSchedules() {
                   <TableCell align="center">{item.ExamType.Type}</TableCell>
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.RoomExam}</TableCell>
-                  <TableCell align="center">{format((new Date(item.DateExam)), 'dd MMMM yyyy')}</TableCell>
+                  <TableCell align="center">{format((new Date(item.ExamDate)), 'dd MMMM yyyy')}</TableCell>
                   <TableCell align="center">{format((new Date(item.StartTime)),'hh:mm a')}</TableCell>
                   <TableCell align="center">{format((new Date(item.EndTime)),'hh:mm a')}</TableCell>
                 </TableRow>

@@ -116,7 +116,7 @@ type ExamSchedule struct {
 	gorm.Model
 	AcademicYear int16
 	RoomExam     string
-	DateExam     time.Time
+	ExamDate     time.Time
 	StartTime    time.Time
 	EndTime      time.Time
 
