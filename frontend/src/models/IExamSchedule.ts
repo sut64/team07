@@ -6,7 +6,7 @@ export interface ExamScheduleInterface {
     ID: number,
     AcademicYear : number,
     RoomExam: string,
-    DateExam: Date,
+    ExamDate: Date,
     StartTime: Date,
     EndTime: Date,
     SemesterID: number,
