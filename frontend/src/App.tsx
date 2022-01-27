@@ -28,7 +28,6 @@ import SubjectTwoToneIcon from '@mui/icons-material/SubjectTwoTone';
 
 import Home from "./components/Home";
 import SignIn from "./components/Signin";
-import Registrars from "./components/Registrar";
 import Withdrawals from "./components/Withdrawal";
 import WithdrawalCreate from "./components/WithdrawalCreate";
 import AddCourses from "./components/AddCourses";
@@ -230,7 +229,6 @@ export default function MiniDrawer() {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/registrars" component={Registrars} />
               <Route exact path="/withdrawal" component={Withdrawals} />
               <Route exact path="/withdrawal/create" component={WithdrawalCreate} />
               <Route exact path="/addcourse" component={AddCourses} />
