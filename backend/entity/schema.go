@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-/*type Student struct {
+type Student struct {
 	gorm.Model
 	ID_student string `gorm:"uniqueIndex"`
 	Prefix     string
@@ -16,11 +16,11 @@ import (
 	Email      string
 	Password   string
 
-	Withdrawals  []Withdrawal  `gorm:"foreignKey:StudentID"`
-	RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
-	//RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
-	//IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
-}*/
+	Withdrawals    []Withdrawal     `gorm:"foreignKey:StudentID"`
+	RequestExams   []RequestExam    `gorm:"foreignKey:StudentID"`
+	RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
+	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
+}
 
 type Teacher struct {
 	gorm.Model
