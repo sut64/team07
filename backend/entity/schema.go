@@ -16,8 +16,8 @@ type Student struct {
 	Email      string
 	Password   string
 
-	Withdrawals  []Withdrawal  `gorm:"foreignKey:StudentID"`
-	RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
+	Withdrawals []Withdrawal `gorm:"foreignKey:StudentID"`
+	//RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
 	//RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
 	//IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
 }
