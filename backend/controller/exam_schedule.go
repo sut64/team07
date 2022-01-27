@@ -63,7 +63,7 @@ func CreateExamSchedule(c *gin.Context) {
 func GetExamSchedule(c *gin.Context) {
 	var ExamSchedule entity.ExamSchedule
 	id := c.Param("id")
-	if err := entity.DB().Preload("Semester").Preload("ExamType").Preload("Course").Raw("SELECT * FROM ExamSchedules WHERE id = ?", id).Find(&ExamSchedule).Error; err != nil {
+	if err := entity.DB().Preload("Semester").Preload("ExamType").Preload("Course").Raw("SELECT * FROM exam_schedules WHERE id = ?", id).Find(&ExamSchedule).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -73,7 +73,7 @@ func GetExamSchedule(c *gin.Context) {
 // GET /ExamSchedules
 func ListExamSchedules(c *gin.Context) {
 	var ExamSchedules []entity.ExamSchedule
-	if err := entity.DB().Preload("Semester").Preload("ExamType").Preload("Course").Raw("SELECT * FROM ExamSchedules").Find(&ExamSchedules).Error; err != nil {
+	if err := entity.DB().Preload("Semester").Preload("ExamType").Preload("Course").Raw("SELECT * FROM exam_schedules").Find(&ExamSchedules).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -84,7 +84,7 @@ func ListExamSchedules(c *gin.Context) {
 // DELETE /ExamSchedules/:id
 func DeleteExamSchedule(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM ExamSchedules WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM exam_schedules WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ExamSchedule not found"})
 		return
 	}
