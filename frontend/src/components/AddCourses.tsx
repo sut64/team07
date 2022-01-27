@@ -79,7 +79,7 @@ function AddCourses() {
               variant="contained"
               color="primary"
             >
-              สร้างข้อมูล
+              เพิ่มรายวิชาที่จะเปิดสอน
             </Button>
           </Box>
         </Box>
@@ -87,22 +87,22 @@ function AddCourses() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="center" width="30%">
+                <TableCell align="center" width="10%">
                   ชื่อรายวิชา
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="10%">
                   รหัสรายวิชา
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="10%">
                   หลักสูตร
                 </TableCell>
-                <TableCell align="center" width="40%">
+                <TableCell align="center" width="10%">
                   อาจารย์ผู้สอน
                 </TableCell>
                 <TableCell align="center" width="10%">
                   จำนวนหน่วยกิต
                 </TableCell>
-                <TableCell align="center" width="50%">
+                <TableCell align="center" width="10%">
                   วันที่เวลาที่สอน
                 </TableCell>
                 <TableCell align="center" width="10%">
