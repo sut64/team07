@@ -19,7 +19,7 @@ func SetupDatabase() {
     panic("failed to connect database")
   }
   database.AutoMigrate(
-    &Teacher{},
+    	&Teacher{},
 //	&Student{},
 	&Semester{},
 	&ExamType{},
@@ -29,14 +29,14 @@ func SetupDatabase() {
 	&AddCourse{},
 //	&RequestStatus{},
 //	&Petition{},
-//	&Registrar{},
+	&Registrar{},
   )
  
   db = database
 
-  //password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+  password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 
-	/*registrar1 := Registrar{
+	registrar1 := Registrar{
 		ID_registrar: "R5678912",
 		Prefix:       "Miss",
 		Name:         "Fasai Jangloei",
@@ -72,7 +72,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Registrar{}).Create(&registrar4)
 
-	student1 := Student{
+	/*student1 := Student{
 		ID_student: "B6202385",
 		Prefix: "Miss",
 		Name: "Phatcha Sisuwo",
