@@ -13,7 +13,7 @@ func CreateExamSchedule(c *gin.Context) {
 	var ExamSchedule entity.ExamSchedule
 	var Semester entity.Semester
 	var ExamType entity.ExamType
-	//var Course entity.Course
+	var Course entity.Course
 
 	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 8 จะถูก bind เข้าตัวแปร ExamSchedule
 	if err := c.ShouldBindJSON(&ExamSchedule); err != nil {
@@ -23,10 +23,10 @@ func CreateExamSchedule(c *gin.Context) {
 
 
 	// 9: ค้นหา Course ด้วย id
-	/*if tx := entity.DB().Where("id = ?", ExamSchedule.CourseID).First(&Course); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", ExamSchedule.CourseID).First(&Course); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
 		return
-	}*/
+	}
 
 	// 10: ค้นหา Semester ด้วย id
 	if tx := entity.DB().Where("id = ?", ExamSchedule.SemesterID).First(&Semester); tx.RowsAffected == 0 {
@@ -42,7 +42,7 @@ func CreateExamSchedule(c *gin.Context) {
 	// 12: สร้าง ExamSchedule
 	pm := entity.ExamSchedule{
 		Semester: Semester,       // โยงความสัมพันธ์กับ Entity Semester
-		//Course:         Course,     // โยงความสัมพันธ์กับ Entity Course
+		Course:    Course,     // โยงความสัมพันธ์กับ Entity Course
 		ExamType:  ExamType,        // โยงความสัมพันธ์กับ Entity ExamType
 		AcademicYear: ExamSchedule.AcademicYear,
 		RoomExam: ExamSchedule.RoomExam,
