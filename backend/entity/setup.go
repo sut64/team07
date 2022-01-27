@@ -76,7 +76,7 @@ func SetupDatabase() {
 
 	registrar5 := Registrar{
 		ID_registrar: "R5901258",
-		Prefix:       "Mr.",
+		Prefix:       "Miss",
 		Name:         "Jeeninee Khuptawuttinun",
 		Email:        "Jeeninee@gmail.com",
 		Password:     string(password),
@@ -252,6 +252,7 @@ func SetupDatabase() {
 		Status: "รอดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status1)
+
 	/*status2 := RequestStatus{
 		Status: "กำลังดำเนินการ",
 	}
@@ -280,7 +281,6 @@ func SetupDatabase() {
 		Type: "ปลายภาค",
 	}
 	db.Model(&ExamType{}).Create(&type2)
-
 	grade1 := Grades{
 		Grade: "A",
 	}
