@@ -1,8 +1,7 @@
 package entity
 
 import (
-
-	//"golang.org/x/crypto/bcrypt"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -282,35 +281,35 @@ func SetupDatabase() {
 	db.Model(&ExamType{}).Create(&type2)
 
 	grade1 := Grades{
-		grade: "A",
+		Grade: "A",
 	}
 	db.Model(&Grades{}).Create(&grade1)
 	grade2 := Grades{
-		grade: "B+",
+		Grade: "B+",
 	}
 	db.Model(&Grades{}).Create(&grade2)
 	grade3 := Grades{
-		grade: "B",
+		Grade: "B",
 	}
 	db.Model(&Grades{}).Create(&grade3)
 	grade4 := Grades{
-		grade: "C+",
+		Grade: "C+",
 	}
 	db.Model(&Grades{}).Create(&grade4)
 	grade5 := Grades{
-		grade: "C",
+		Grade: "C",
 	}
 	db.Model(&Grades{}).Create(&grade5)
 	grade6 := Grades{
-		grade: "D+",
+		Grade: "D+",
 	}
 	db.Model(&Grades{}).Create(&grade6)
 	grade7 := Grades{
-		grade: "D",
+		Grade: "D",
 	}
 	db.Model(&Grades{}).Create(&grade7)
 	grade8 := Grades{
-		grade: "F",
+		Grade: "F",
 	}
 	db.Model(&Grades{}).Create(&grade8)
 

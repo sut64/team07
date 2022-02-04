@@ -195,7 +195,7 @@ type RequestExam struct {
 type IncreaseGrades struct {
 	gorm.Model
 	Date        time.Time
-	grade_point float64
+	grade_point int16
 	Description string
 
 	StudentID *uint
