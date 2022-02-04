@@ -16,9 +16,9 @@ type Student struct {
 	Email      string
 	Password   string
 
-	Withdrawals    []Withdrawal     `gorm:"foreignKey:StudentID"`
-	RequestExams   []RequestExam    `gorm:"foreignKey:StudentID"`
-	RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
+	Withdrawals  []Withdrawal  `gorm:"foreignKey:StudentID"`
+	RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
+	//RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
 	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
 }
 
@@ -62,8 +62,8 @@ type Course struct {
 	Coursename   string
 	Coursenumber int32
 
-	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
-	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
+	ExamSchedule   []ExamSchedule   `gorm:"foreignKey:CourseID"`
+	AddCourse      []AddCourse      `gorm:"foreignKey:CourseID"`
 	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:CourseID"`
 	RecordPetition []RecordPetition `gorm:"foreignKey:CourseID"`
 	RequestExams  []RequestExam  `gorm:"foreignKey:CourseID"`
@@ -197,7 +197,7 @@ type RecordPetition struct {
 type IncreaseGrades struct {
 	gorm.Model
 	Date        time.Time
-	Credit      uint
+	grade_point float64
 	Description string
 
 	StudentID *uint
