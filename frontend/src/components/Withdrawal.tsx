@@ -93,7 +93,7 @@ function Withdrawals() {
                                 <TableCell align="center" width="2%">
                                     นักศึกษา
                                 </TableCell>
-                                <TableCell align="center" width="5%">
+                                <TableCell align="center" width="10%">
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
@@ -120,7 +120,7 @@ function Withdrawals() {
                             {withdrawals.map((wd: WithdrawalsInterface) => (
                                 <TableRow key={wd.ID}>
                                     <TableCell align="center">{wd.Student.ID_student}</TableCell>
-                                    <TableCell align="center">{wd.Course.Coursename}</TableCell>
+                                    <TableCell align="center">{wd.RegisCourse.Course.Coursenumber} {wd.RegisCourse.Course.Coursename} </TableCell>
                                     <TableCell align="center">{wd.Teacher.Name}</TableCell>
                                     <TableCell align="center">{wd.Semester.Semester}</TableCell>
                                     <TableCell align="center">{wd.YearTime}</TableCell>

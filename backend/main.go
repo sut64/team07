@@ -66,6 +66,14 @@ func main() {
 			protected.PATCH("/courses", controller.UpdateCourse)
 			protected.DELETE("/courses/:id", controller.DeleteCourse)
 
+			// RegisCourse Routes
+			protected.GET("/regiscourses", controller.ListRegisCoursess)
+			protected.GET("/regiscourses/:id", controller.ListRegisCourses)
+			protected.GET("/regiscourse/:id", controller.GetRegisCourse)
+			protected.POST("/regiscourses", controller.CreateRegisCourse)
+			protected.PATCH("/regiscourses", controller.UpdateRegisCourse)
+			protected.DELETE("/regiscourses/:id", controller.DeleteRegisCourse)
+
 			// AddCourse Routes
 			protected.GET("/addcourses", controller.ListAddCourses)
 			protected.GET("/addcourse/:id", controller.GetAddCourse)
