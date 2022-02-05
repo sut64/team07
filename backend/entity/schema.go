@@ -66,7 +66,7 @@ type Course struct {
 	AddCourse      []AddCourse      `gorm:"foreignKey:CourseID"`
 	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:CourseID"`
 	RecordPetition []RecordPetition `gorm:"foreignKey:CourseID"`
-	RequestExams  []RequestExam  `gorm:"foreignKey:CourseID"`
+	RequestExams   []RequestExam    `gorm:"foreignKey:CourseID"`
 }
 
 type Program struct {
@@ -91,7 +91,7 @@ type Grades struct {
 
 type Petition struct {
 	gorm.Model
-	Claim          string
+	Claim string
 
 	RecordPetition []RecordPetition `gorm:"foreignKey:PetitionID"`
 }
@@ -193,11 +193,10 @@ type RecordPetition struct {
 	Course   Course `gorm:"references:id"`
 }
 
-
 type IncreaseGrades struct {
 	gorm.Model
 	Date        time.Time
-	grade_point int16
+	GradePoint  int
 	Description string
 
 	StudentID *uint
