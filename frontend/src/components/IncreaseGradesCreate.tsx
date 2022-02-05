@@ -148,7 +148,7 @@ function IncreaseGradesCreate() {
             StudentID: convertType(increasegrades.StudentID),
             CourseID: convertType(increasegrades.CourseID),
             GradesID: convertType(increasegrades.GradesID),
-            Credit: convertType(increasegrades.Credit),
+            GradePoint: +(increasegrades.GradePoint ?? ""),
             Description: increasegrades.Description ?? "",
             Date: selectedDate || "",
         };
@@ -262,18 +262,19 @@ function IncreaseGradesCreate() {
                             <Typography
                                 color="textPrimary"
                             >
-                                หน่วยกิต
+                                คะแนน
                             </Typography>
+                            <option aria-label="None" value="">
+                                กรุณาใส่คะแนน
+                            </option>
                             <TextField
-                                id="Credit"
+                                id="GradePoint"
                                 variant="outlined"
                                 type="number"
                                 size="medium"
-                                placeholder="กรุณาใส่หน่วยกิต"
-                                value={increasegrades.Credit || ""}
+                                value={increasegrades.GradePoint || ""}
                                 onChange={handleInputChange}
                             />
-
                         </FormControl>
                     </Grid>
 
