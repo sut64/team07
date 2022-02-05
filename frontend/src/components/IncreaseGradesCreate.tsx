@@ -310,10 +310,10 @@ function IncreaseGradesCreate() {
                             <Typography
                                 color="textPrimary"
                             >
-                                เหตุผล
+                                หมายเหตุ
                             </Typography>
                             <option aria-label="None" value="">
-                                กรุณาใส่เหตุผล
+                                กรุณาใส่หมายเหตุ
                             </option>
                             <TextField
                                 id="Description"
