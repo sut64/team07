@@ -33,6 +33,7 @@ func SetupDatabase() {
 		&RequestStatus{},
 		&RequestExam{},
 		&RecordPetition{},
+		&RegisCourse{},
 		&Withdrawal{},
 	)
 
@@ -315,5 +316,84 @@ func SetupDatabase() {
 		Grade: "F",
 	}
 	db.Model(&Grades{}).Create(&grade8)
+
+	regis1 := RegisCourse{
+		Student: student2,
+		Course:  course4,
+	}
+	db.Model(&RegisCourse{}).Create(&regis1)
+
+	// ข้อมูล regiscourse
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student2,
+		Course:  course1,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student2,
+		Course:  course2,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student2,
+		Course:  course3,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student1,
+		Course:  course4,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student1,
+		Course:  course5,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student1,
+		Course:  course6,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student3,
+		Course:  course1,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student3,
+		Course:  course2,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student4,
+		Course:  course3,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student4,
+		Course:  course4,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student5,
+		Course:  course5,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student5,
+		Course:  course6,
+	})
+
+	// // ข้อมูล Withdrawal
+	// db.Model(&Withdrawal{}).Create(&Withdrawal{
+	// 	Student:        student2,
+	// 	RegisCourse:    regis1,
+	// 	Teacher:        teacher1,
+	// 	Semester:       Semester1,
+	// 	YearTime:       2564,
+	// 	Reason:         "so hard",
+	// 	RemainCredit:   15,
+	// 	WithdrawalTime: time.Now(),
+	// })
 
 }

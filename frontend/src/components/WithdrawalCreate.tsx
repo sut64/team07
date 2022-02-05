@@ -21,7 +21,8 @@ import { WithdrawalsInterface } from "../models/IWithdrawal";
 
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker, } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { TextField } from "@material-ui/core";
+import { TableBody, TextField } from "@material-ui/core";
+import { RegisCoursesInterface } from "../models/IRegisCourse";
 
 const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -47,13 +48,12 @@ function WithdrawalCreate() {
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [withdrawals, setWithdrawals] = useState<Partial<WithdrawalsInterface>>({});
     const [students, setStudents] = useState<Partial<StudentsInterface>>({});
-    const [courses, setCourses] = useState<CoursesInterface[]>([]);
+    const [regiscourses, setRegisCourses] = useState<RegisCoursesInterface[]>([]);
     const [teachers, setTeachers] = useState<TeachersInterface[]>([]);
     const [semesters, setSemesters] = useState<SemestersInterface[]>([]);
-
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
-
+    const [errorMessage, setErrorMessage] = useState("");
     const apiUrl = "http://localhost:8080";
     const requestOptions = {
         method: "GET",
@@ -95,7 +95,6 @@ function WithdrawalCreate() {
         });
     };
 
-
     const getStudents = async () => {
         let uid = localStorage.getItem("uid");
         fetch(`${apiUrl}/student/${uid}`, requestOptions)
@@ -109,12 +108,13 @@ function WithdrawalCreate() {
             });
     };
 
-    const getCourses = async () => {
-        fetch(`${apiUrl}/courses`, requestOptions)
+    const getRegisCourses = async () => {
+        let uid = localStorage.getItem("uid");
+        fetch(`${apiUrl}/regiscourses/${uid}`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
-                    setCourses(res.data);
+                    setRegisCourses(res.data);
                 } else {
                     console.log("else");
                 }
@@ -139,15 +139,17 @@ function WithdrawalCreate() {
             .then((res) => {
                 if (res.data) {
                     setSemesters(res.data);
+
                 } else {
                     console.log("else");
+
                 }
             });
     };
 
     useEffect(() => {
         getStudents();
-        getCourses();
+        getRegisCourses();
         getTeachers();
         getSemesters();
     }, []);
@@ -160,7 +162,7 @@ function WithdrawalCreate() {
     function submit() {
         let data = {
             StudentID: convertType(students?.ID),
-            CourseID: convertType(withdrawals.CourseID),
+            RegisCourseID: convertType(withdrawals.RegisCourseID),
             TeacherID: convertType(withdrawals.TeacherID),
             SemesterID: convertType(withdrawals.SemesterID),
             YearTime: convertType(withdrawals.YearTime),
@@ -185,15 +187,19 @@ function WithdrawalCreate() {
                 if (res.data) {
                     console.log("บันทึกได้")
                     setSuccess(true);
+                    setErrorMessage("")
+
                 } else {
                     console.log("บันทึกไม่ได้")
                     setError(true);
+                    setErrorMessage(res.error)
+
                 }
             });
     }
 
     return (
-        <Container className={classes.container} maxWidth="sm">
+        <Container className={classes.container} maxWidth="md">
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success">
                     บันทึกสำเร็จ
@@ -201,7 +207,7 @@ function WithdrawalCreate() {
             </Snackbar>
             <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
-                    การบันทึกผิดพลาด
+                    การบันทึกผิดพลาด: {errorMessage}
                 </Alert>
             </Snackbar>
             <Paper className={classes.paper}>
@@ -219,7 +225,7 @@ function WithdrawalCreate() {
                 </Box>
                 <Divider />
                 <Grid container spacing={3} className={classes.root}>
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"
@@ -234,40 +240,41 @@ function WithdrawalCreate() {
                             >
                                 <option aria-label="None" value="">
                                     {students?.ID_student}   {students?.Name}
-
                                 </option>
                             </Select>
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"
                             >
                                 รหัสรายวิชา
                             </Typography>
+
                             <Select
                                 native
-                                value={withdrawals.CourseID}
+                                value={withdrawals.RegisCourseID}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: "CourseID",
+                                    name: "RegisCourseID",
                                 }}
                             >
                                 <option aria-label="None" value="">
-                                    กรุณาเลือกรหัสรายวิชา
+                                    กรุณาเลือกรายวิชา
                                 </option>
-                                {courses.map((item: CoursesInterface) => (
+
+                                {regiscourses.map((item: RegisCoursesInterface) => (
                                     <option value={item.ID} key={item.ID}>
-                                        {item.Coursenumber} {item.Coursename}
+                                        {item.CourseID}
                                     </option>
                                 ))}
                             </Select>
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"
@@ -282,11 +289,11 @@ function WithdrawalCreate() {
                                     name: "TeacherID",
                                 }}
                             >
-                                <option aria-label="None" value="">
+                                <option aria-label="None" value="1">
                                     กรุณาเลือกอาจารย์ผู้สอน
                                 </option>
                                 {teachers.map((item: TeachersInterface) => (
-                                    <option value={item.ID} key={item.ID}>
+                                    <option value={1} key={item.ID}>
                                         {item.Name}
                                     </option>
                                 ))}
@@ -294,7 +301,7 @@ function WithdrawalCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"
@@ -321,7 +328,7 @@ function WithdrawalCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"
@@ -345,7 +352,7 @@ function WithdrawalCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"
@@ -390,7 +397,7 @@ function WithdrawalCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <Typography
                                 color="textPrimary"

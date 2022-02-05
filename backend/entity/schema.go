@@ -3,6 +3,7 @@ package entity
 import (
 	"time"
 
+	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
 
@@ -16,9 +17,10 @@ type Student struct {
 	Email      string
 	Password   string
 
-	Withdrawals  []Withdrawal  `gorm:"foreignKey:StudentID"`
-	RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
-	//RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
+	RegisCourse    []RegisCourse    `gorm:"foreignKey:StudentID"`
+	Withdrawals    []Withdrawal     `gorm:"foreignKey:StudentID"`
+	RequestExams   []RequestExam    `gorm:"foreignKey:StudentID"`
+	RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
 	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
 }
 
@@ -60,8 +62,9 @@ type ExamType struct {
 type Course struct {
 	gorm.Model
 	Coursename   string
-	Coursenumber int32
+	Coursenumber int32 `gorm:"uniqueIndex"`
 
+	RegisCourse    []RegisCourse    `gorm:"foreignKey:CourseID"`
 	ExamSchedule   []ExamSchedule   `gorm:"foreignKey:CourseID"`
 	AddCourse      []AddCourse      `gorm:"foreignKey:CourseID"`
 	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:CourseID"`
@@ -130,14 +133,26 @@ type ExamSchedule struct {
 	Semester   Semester `gorm:"references:id"`
 }
 
+type RegisCourse struct {
+	gorm.Model
+
+	StudentID *uint
+	Student   Student `gorm:"references:id"`
+
+	CourseID *uint
+	Course   Course `gorm:"references:coursenumber"`
+
+	Withdrawal []Withdrawal `gorm:"foreignKey:RegisCourseID"`
+}
+
 type Withdrawal struct {
 	gorm.Model
 
 	StudentID *uint
 	Student   Student `gorm:"references:id" valid:"-"`
 
-	CourseID *uint
-	Course   Course `gorm:"references:id" valid:"-"`
+	RegisCourseID *uint
+	RegisCourse   RegisCourse `gorm:"references:id" valid:"-"`
 
 	TeacherID *uint
 	Teacher   Teacher `gorm:"references:id" valid:"-"`
@@ -145,10 +160,10 @@ type Withdrawal struct {
 	SemesterID *uint
 	Semester   Semester `gorm:"references:id" valid:"-"`
 
-	YearTime       int
-	RemainCredit   int
-	Reason         string
-	WithdrawalTime time.Time
+	YearTime       int       // `valid:"range(2000|2999)~YearTime must be in range 2500-2600"`
+	RemainCredit   int       // `valid:"range(1|1000)~RemainCredit must be integer positive number"`
+	Reason         string    // `valid:"required~Reason cannot be blank"`
+	WithdrawalTime time.Time // `valid:"past~WithdrawalTime must be in the present"`
 }
 
 type RequestExam struct {
@@ -207,4 +222,18 @@ type IncreaseGrades struct {
 
 	CourseID *uint
 	Course   Course `gorm:"references:id"`
+}
+
+func init() {
+	govalidator.CustomTypeTagMap.Set("past", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		now := (time.Now().Add(1 + time.Millisecond))
+		return now.After(t)
+	})
+
+	govalidator.CustomTypeTagMap.Set("future", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		now := time.Now()
+		return now.Before(t)
+	})
 }
