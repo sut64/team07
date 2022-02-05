@@ -95,7 +95,7 @@ function IncreaseGrades() {
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
-                                    หน่วยกิต
+                                    คะแนน
                                 </TableCell>
                                 <TableCell align="center" width="5%">
                                     ผลการเรียน
@@ -113,7 +113,7 @@ function IncreaseGrades() {
                                 <TableRow key={item.ID}>
                                     <TableCell align="center">{item.Student.ID_student}</TableCell>
                                     <TableCell align="center">{item.Course.Coursename}</TableCell>
-                                    <TableCell align="center">{item.Credit}</TableCell>
+                                    <TableCell align="center">{item.GradePoint}</TableCell>
                                     <TableCell align="center">{item.Grades.Grade}</TableCell>
                                     <TableCell align="center">{item.Description}</TableCell>
                                     <TableCell align="center">{format((new Date(item.Date)), 'dd MMMM yyyy hh:mm a')}</TableCell>
