@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/sut64/team07/entity"
 )
@@ -48,7 +49,7 @@ func CreateRequestExam(c *gin.Context) {
 	}
 
 	// 15: ค้นหา requeststatus ด้วย id
-	if tx := entity.DB().Where("id = ?", requestexam.RequestStatusID).First(&requeststatus); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = 1", requestexam.RequestStatusID).First(&requeststatus); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "requeststatus not found"})
 		return
 	}
@@ -64,6 +65,12 @@ func CreateRequestExam(c *gin.Context) {
 		RequestStatus: requeststatus,            // โยงความสัมพันธ์กับ Entity requeststatus
 		RequestTime:   requestexam.RequestTime,  // ตั้งค่าฟิลด์ RequestTime
 
+	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(re); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	// : บันทึก
