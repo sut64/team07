@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ExamScheduleCreate(this: any) {
+export default function ExamScheduleCreate() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectTimeStart, setSelectedTimeStart] = useState<Date | null>(new Date());
@@ -63,6 +63,7 @@ function ExamScheduleCreate(this: any) {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
@@ -183,8 +184,10 @@ function ExamScheduleCreate(this: any) {
       .then((res) => {
         if (res.data) {
           setSuccess(true);
+          setErrorMessage("");
         } else {
           setError(true);
+          setErrorMessage(res.error);
         }
       });
   }
@@ -198,7 +201,7 @@ function ExamScheduleCreate(this: any) {
       </Snackbar>
       <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          บันทึกตารางสอบไม่สำเร็จ
+        บันทึกตารางสอบไม่สำเร็จ: {errorMessage}
         </Alert>
       </Snackbar>
       <Paper className={classes.paper}>
@@ -374,5 +377,3 @@ function ExamScheduleCreate(this: any) {
     </Container>
   );
 }
-
-export default ExamScheduleCreate;

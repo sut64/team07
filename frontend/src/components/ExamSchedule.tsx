@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ExamSchedules() {
+export default function ExamSchedules() {
   const classes = useStyles();
   const [ExamSchedule, setExamSchedules] = useState<ExamScheduleInterface[]>([]);
   const apiUrl = "http://localhost:8080";
@@ -132,5 +132,3 @@ function ExamSchedules() {
     </div>
   );
 }
-
-export default ExamSchedules;
