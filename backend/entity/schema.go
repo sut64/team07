@@ -99,20 +99,21 @@ type Petition struct {
 	RecordPetition []RecordPetition `gorm:"foreignKey:PetitionID"`
 }
 
+
 type AddCourse struct {
 	gorm.Model
-	Credit   int16
-	DayTime  string
-	SaveTime time.Time
+	Credit   int16   
+	DayTime  string `valid:"required~DayTime cannot be blank"`
+	SaveTime time.Time  
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"` 
 
 	ProgramID *uint
-	Program   Program `gorm:"references:id"`
+	Program   Program `gorm:"references:id" valid:"-"`
 
 	TeacherID *uint
-	Teacher   Teacher `gorm:"references:id"`
+	Teacher   Teacher `gorm:"references:id" valid:"-"`
 }
 
 type ExamSchedule struct {
@@ -227,13 +228,17 @@ type IncreaseGrades struct {
 func init() {
 	govalidator.CustomTypeTagMap.Set("past", func(i interface{}, context interface{}) bool {
 		t := i.(time.Time)
-		now := (time.Now().Add(1 + time.Millisecond))
+		now := time.Now()
 		return now.After(t)
 	})
-
 	govalidator.CustomTypeTagMap.Set("future", func(i interface{}, context interface{}) bool {
 		t := i.(time.Time)
 		now := time.Now()
-		return now.Before(t)
+		return now.Before(time.Time(t))
+	})
+	govalidator.CustomTypeTagMap.Set("DelayNow3Min", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		return t.After(time.Now().Add(3 - time.Minute))
 	})
 }
+

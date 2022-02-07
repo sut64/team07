@@ -1,0 +1,52 @@
+package entity
+
+import (
+	"testing"
+	"time"
+	//"fmt"
+
+	"github.com/asaskevich/govalidator"
+	. "github.com/onsi/gomega"
+)
+
+func TestAddCoursePass(t *testing.T) {
+	g := NewGomegaWithT(t)
+
+	// ข้อมูลถูกต้องหมดทุก field
+	addcourse := AddCourse{
+		Credit:   4,
+		DayTime:  "TUE 18.00-21.00",
+		SaveTime: time.Now(),
+	}
+	// ตรวจสอบด้วย govalidator
+	ok, err := govalidator.ValidateStruct(addcourse)
+
+	// ok ต้องเป็น true แปลว่าไม่มี error
+	g.Expect(ok).To(BeTrue())
+
+	// err เป็นค่า nil แปลว่าไม่มี error
+	g.Expect(err).To(BeNil())
+}
+
+func TestDayTimeNotBlank(t *testing.T) {
+ 	g := NewGomegaWithT(t)
+
+ 	addcourse := AddCourse{
+		Credit:   4,
+		DayTime:  "",//ผิด
+		SaveTime: time.Now(),
+	}
+
+ 	// ตรวจสอบด้วย govalidator
+	ok, err := govalidator.ValidateStruct(addcourse)
+
+	// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
+	g.Expect(ok).ToNot(BeTrue())
+
+	// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
+	g.Expect(err).ToNot(BeNil())
+
+	// err.Error ต้องมี error message แสดงออกมา
+	g.Expect(err.Error()).To(Equal("DayTime cannot be blank"))
+ }
+
