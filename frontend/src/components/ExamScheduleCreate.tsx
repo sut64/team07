@@ -22,6 +22,7 @@ import { ExamTypesInterface } from "../models/IExamType";
 import { SemestersInterface } from "../models/ISemester";
 import { CoursesInterface } from "../models/ICourse";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
+import NavBar from "./Navbar";
 
 import {
   MuiPickersUtilsProvider,
@@ -194,6 +195,7 @@ export default function ExamScheduleCreate() {
 
   return (
     <Container className={classes.container} maxWidth="md">
+      <NavBar />
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           บันทึกตารางสอบสำเร็จ
