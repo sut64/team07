@@ -14,6 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { AddCoursesInterface } from "../models/IAddCourse";
 import { format } from 'date-fns'
+import NavBar from "./Navbar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,10 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
     tableSpace: {
       marginTop: 10,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
-function AddCourses() {
+export default function AddCourses() {
   const classes = useStyles();
   const [addcourse, setAddCourses] = useState<AddCoursesInterface[]>([]);
   const apiUrl = "http://localhost:8080";
@@ -47,7 +56,7 @@ function AddCourses() {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-            setAddCourses(res.data);
+          setAddCourses(res.data);
         } else {
           console.log("else");
         }
@@ -60,6 +69,8 @@ function AddCourses() {
 
   return (
     <div>
+      <NavBar />
+      <div className={classes.drawerHeader} />
       <Container className={classes.container} maxWidth="md">
         <Box display="flex">
           <Box flexGrow={1}>
@@ -116,7 +127,7 @@ function AddCourses() {
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.Course.Coursenumber}</TableCell>
                   <TableCell align="center">{item.Program.Programname}</TableCell>
-                  <TableCell align="center">{item.Teacher.Name}</TableCell> 
+                  <TableCell align="center">{item.Teacher.Name}</TableCell>
                   <TableCell align="center">{item.Credit}</TableCell>
                   <TableCell align="center">{item.DayTime}</TableCell>
                   <TableCell align="center">{format((new Date(item.SaveTime)), 'dd MMMM yyyy hh:mm a')}</TableCell>
@@ -129,5 +140,3 @@ function AddCourses() {
     </div>
   );
 }
-
-export default AddCourses;
