@@ -14,6 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { WithdrawalsInterface } from "../models/IWithdrawal";
 import { format } from 'date-fns'
+import NavBar from "./Navbar";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,10 +28,18 @@ const useStyles = makeStyles((theme: Theme) =>
         tableSpace: {
             marginTop: 20,
         },
+        drawerHeader: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+        },
     })
 );
 
-function Withdrawals() {
+export default function Withdrawals() {
     const classes = useStyles();
     const [withdrawals, setWithdrawals] = useState<WithdrawalsInterface[]>([]);
 
@@ -43,7 +52,7 @@ function Withdrawals() {
         },
     };
 
-    const getWithdrawals= async () => {
+    const getWithdrawals = async () => {
         let uid = localStorage.getItem("uid");
         fetch(`${apiUrl}/withdrawals/${uid}`, requestOptions)
             .then((response) => response.json())
@@ -63,6 +72,8 @@ function Withdrawals() {
 
     return (
         <div>
+            <NavBar />
+            <div className={classes.drawerHeader} />
             <Container className={classes.container} maxWidth="lg">
                 <Box display="flex">
                     <Box flexGrow={1}>
@@ -93,7 +104,7 @@ function Withdrawals() {
                                 <TableCell align="center" width="2%">
                                     นักศึกษา
                                 </TableCell>
-                                <TableCell align="center" width="10%">
+                                <TableCell align="center" width="5%">
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
@@ -120,7 +131,7 @@ function Withdrawals() {
                             {withdrawals.map((wd: WithdrawalsInterface) => (
                                 <TableRow key={wd.ID}>
                                     <TableCell align="center">{wd.Student.ID_student}</TableCell>
-                                    <TableCell align="center">{wd.RegisCourse.Course.Coursenumber} {wd.RegisCourse.Course.Coursename} </TableCell>
+                                    <TableCell align="center">{wd.RegisCourse.CourseID}</TableCell>
                                     <TableCell align="center">{wd.Teacher.Name}</TableCell>
                                     <TableCell align="center">{wd.Semester.Semester}</TableCell>
                                     <TableCell align="center">{wd.YearTime}</TableCell>
@@ -137,4 +148,3 @@ function Withdrawals() {
     );
 }
 
-export default Withdrawals;
