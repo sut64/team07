@@ -5,9 +5,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/sut64/team07/entity"
 	"github.com/gin-gonic/gin"
-	
 )
-
 // POST /AddCourses
 func CreateAddCourse(c *gin.Context) {
 
@@ -27,8 +25,7 @@ func CreateAddCourse(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
 		return 
 	} 
-  
-	
+  	
 	// 10: ค้นหา Program ด้วย id
 	if tx := entity.DB().Where("id = ?", AddCourse.ProgramID).First(&Program); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Semester not found"})
