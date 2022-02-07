@@ -2,9 +2,10 @@ package controller
 
 import (
 	"net/http"
-
+	"github.com/asaskevich/govalidator"
 	"github.com/sut64/team07/entity"
 	"github.com/gin-gonic/gin"
+	
 )
 
 // POST /AddCourses
@@ -45,10 +46,15 @@ func CreateAddCourse(c *gin.Context) {
 		Program:  Program, // โยงความสัมพันธ์กับ Entity Program
 		Teacher:  Teacher, // โยงความสัมพันธ์กับ Entity Teacher
 		Credit: AddCourse.Credit,
-		DayTime: AddCourse.DayTime,
+		DayTime: AddCourse.DayTime, 
 		SaveTime: AddCourse.SaveTime,
 	}
 
+	//ขั้นตอนการ validate ข้อมูล
+	if _, err := govalidator.ValidateStruct(ac); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	// 13: บันทึก
 	if err := entity.DB().Create(&ac).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
