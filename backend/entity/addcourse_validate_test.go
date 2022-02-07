@@ -50,3 +50,25 @@ func TestDayTimeNotBlank(t *testing.T) {
 	g.Expect(err.Error()).To(Equal("DayTime cannot be blank"))
  }
 
+// ตรวจสอบหน่วยกิตต้องเป็นตัวเลขที่อยู่ในช่วง 1-4
+func TestCreditMustBeInRange(t *testing.T) {
+	g := NewGomegaWithT(t)
+
+	addcourse := AddCourse{
+		Credit:   10, //ผิด
+		DayTime:  "TUE 18.00-21.00",
+		SaveTime: time.Now(),
+	}
+
+		ok, err := govalidator.ValidateStruct(addcourse)
+
+		// ok ต้องไม่เป็น true แปลว่าต้องจับ error ได้
+		g.Expect(ok).ToNot(BeTrue())
+
+		// err ต้องไม่เป็น nil แปลว่าต้องจับ error ได้
+		g.Expect(err).ToNot(BeNil())
+
+		// err.Error() ต้องมี message แสดงออกมา
+		g.Expect(err.Error()).To(Equal("Credit: 10 does not validate as range(1|4)"))
+
+}

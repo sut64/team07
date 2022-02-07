@@ -104,7 +104,7 @@ type AddCourse struct {
 	gorm.Model
 	Credit   int16   
 	DayTime  string `valid:"required~DayTime cannot be blank"`
-	SaveTime time.Time  
+	SaveTime time.Time  `valid:"DelayNow3Min~SaveTime must not be past."`
 
 	CourseID *uint
 	Course   Course `gorm:"references:id" valid:"-"` 
