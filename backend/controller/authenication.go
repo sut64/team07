@@ -3,9 +3,9 @@ package controller
 import (
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/sut64/team07/entity"
 	"github.com/sut64/team07/service"
-	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -19,6 +19,7 @@ type LoginPayload struct {
 type LoginResponse struct {
 	Token string `json:"token"`
 	ID    uint   `json:"id"`
+	Role  string `json:"role"`
 }
 
 // POST /login
@@ -60,6 +61,7 @@ func LoginStudent(c *gin.Context) {
 	tokenResponse := LoginResponse{
 		Token: signedToken,
 		ID:    students.ID,
+		Role:  `student`,
 	}
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
 }
@@ -101,6 +103,7 @@ func LoginRegistrar(c *gin.Context) {
 	tokenResponse := LoginResponse{
 		Token: signedToken,
 		ID:    registrars.ID,
+		Role:  `registrar`,
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
