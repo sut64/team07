@@ -99,15 +99,14 @@ type Petition struct {
 	RecordPetition []RecordPetition `gorm:"foreignKey:PetitionID"`
 }
 
-
 type AddCourse struct {
 	gorm.Model
-	Credit   int16   `valid:"range(1|4)"`
-	DayTime  string `valid:"required~DayTime cannot be blank"`
-	SaveTime time.Time  `valid:"DelayNow3Min~SaveTime must not be past."`
+	Credit   int16     `valid:"range(1|4)"`
+	DayTime  string    `valid:"required~DayTime cannot be blank"`
+	SaveTime time.Time `valid:"DelayNow3Min~SaveTime must not be past."`
 
 	CourseID *uint
-	Course   Course `gorm:"references:id" valid:"-"` 
+	Course   Course `gorm:"references:id" valid:"-"`
 
 	ProgramID *uint
 	Program   Program `gorm:"references:id" valid:"-"`
@@ -161,10 +160,10 @@ type Withdrawal struct {
 	SemesterID *uint
 	Semester   Semester `gorm:"references:id" valid:"-"`
 
-	YearTime       int       // `valid:"range(2000|2999)~YearTime must be in range 2500-2600"`
-	RemainCredit   int       // `valid:"range(1|1000)~RemainCredit must be integer positive number"`
-	Reason         string    // `valid:"required~Reason cannot be blank"`
-	WithdrawalTime time.Time // `valid:"past~WithdrawalTime must be in the present"`
+	YearTime       int       `valid:"range(2000|3000)~ข้อมูลปีการศึกษาผิดพลาด, required~ข้อมูลปีการศึกษาผิดพลาด"`
+	RemainCredit   int       `valid:"positive~ข้อมูลหน่วยกิตไม่ถูกต้อง, required~ข้อมูลหน่วยกิตไม่ถูกต้อง"`
+	Reason         string    `valid:"required~ข้อมูลเหตุผลไม่ถูกต้อง"`
+	WithdrawalTime time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
 }
 
 type RequestExam struct {
@@ -236,9 +235,18 @@ func init() {
 		now := time.Now()
 		return now.Before(time.Time(t))
 	})
+	govalidator.CustomTypeTagMap.Set("present", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		now := time.Now()
+		return t.After(now.Add(3-time.Minute)) && t.Before(now.Add(3+time.Minute))
+	})
 	govalidator.CustomTypeTagMap.Set("DelayNow3Min", func(i interface{}, context interface{}) bool {
 		t := i.(time.Time)
 		return t.After(time.Now().Add(3 - time.Minute))
 	})
-}
+	govalidator.CustomTypeTagMap.Set("positive", func(i interface{}, context interface{}) bool {
+		num := i
+		return num.(int) > 0
+	})
 
+}
