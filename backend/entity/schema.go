@@ -102,9 +102,9 @@ type Petition struct {
 
 type AddCourse struct {
 	gorm.Model
-	Credit   int16   `valid:"range(1|4)"`
-	DayTime  string `valid:"required~DayTime cannot be blank"`
-	SaveTime time.Time  `valid:"DelayNow3Min~SaveTime must not be past."`
+	Credit   int16   `valid:"range(1|4)~จำนวนหน่วยกิตต้องอยู่ในช่วง 1-4"`
+	DayTime  string `valid:"required~วันที่และเวลาที่สอนต้องไม่เป็นช่องว่าง"`
+	SaveTime time.Time  `valid:"DelayNow3Min~วันที่และเวลาที่บันทึกต้องไม่เป็นอดีต"`
 
 	CourseID *uint
 	Course   Course `gorm:"references:id" valid:"-"` 
