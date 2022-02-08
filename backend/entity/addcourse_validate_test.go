@@ -47,7 +47,7 @@ func TestDayTimeNotBlank(t *testing.T) {
 	g.Expect(err).ToNot(BeNil())
 
 	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal("DayTime cannot be blank"))
+	g.Expect(err.Error()).To(Equal("ข้อมูลวันที่และเวลาที่สอนผิดพลาด"))
  }
 
 // ตรวจสอบวันเวลาที่บันทึกต้องไม่เป็นเวลาในอดีต
@@ -70,7 +70,7 @@ func TestSaveTimeMustNotBePast(t *testing.T) {
 	g.Expect(err).ToNot(BeNil())
 
 	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal("SaveTime must not be past."))
+	g.Expect(err.Error()).To(Equal("ข้อมูลวันที่และเวลาที่บันทึกผิดพลาด"))
 }
 // ตรวจสอบหน่วยกิตต้องเป็นตัวเลขที่อยู่ในช่วง 1-4
 func TestCreditMustBeInRange(t *testing.T) {
@@ -91,6 +91,6 @@ func TestCreditMustBeInRange(t *testing.T) {
 		g.Expect(err).ToNot(BeNil())
 
 		// err.Error() ต้องมี message แสดงออกมา
-		g.Expect(err.Error()).To(Equal("Credit: 10 does not validate as range(1|4)"))
+		g.Expect(err.Error()).To(Equal("ข้อมูลหน่วยกิตผิดพลาด"))
 
 }
