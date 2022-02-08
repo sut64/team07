@@ -170,25 +170,25 @@ type RequestExam struct {
 	gorm.Model
 
 	StudentID *uint
-	Student   Student `gorm:"references:id"`
+	Student   Student `gorm:"references:id" valid:"-"`
 
 	SemesterID *uint
-	Semester   Semester `gorm:"references:id"`
+	Semester   Semester `gorm:"references:id" valid:"-"`
 
-	AcademicYear int
+	AcademicYear int `valid:"required~ข้อมูลปีการศึกษาไม่ถูกต้อง,range(2500|2600)~ข้อมูลปีการศึกษาไม่ถูกต้อง"`
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"`
 
 	TeacherID *uint
-	Teacher   Teacher `gorm:"references:id"`
+	Teacher   Teacher `gorm:"references:id" valid:"-"`
 
-	Tel string
+	Tel string `valid:"required~ข้อมูลเบอร์ติดต่อไม่ถูกต้อง,matches(^0([6|8|9])([0-9]{8}$))~ข้อมูลเบอร์ติดต่อไม่ถูกต้อง"`
 
 	RequestStatusID *uint
 	RequestStatus   RequestStatus `gorm:"references:id"`
 
-	RequestTime time.Time
+	RequestTime time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
 }
 
 type RecordPetition struct {
