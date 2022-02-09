@@ -21,6 +21,7 @@ import { IncreaseGradesInterface } from "../models/IIncreaseGrades";
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker, } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
+import NavBar from "./Navbar";
 
 const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -38,10 +39,18 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(2),
             color: theme.palette.text.secondary,
         },
+        drawerHeader: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+        },
     })
 );
 
-function IncreaseGradesCreate() {
+export default function IncreaseGradesCreate() {
     const classes = useStyles();
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [increasegrades, setIncreaseGrades] = useState<Partial<IncreaseGradesInterface>>({});
@@ -148,7 +157,7 @@ function IncreaseGradesCreate() {
             StudentID: convertType(increasegrades.StudentID),
             CourseID: convertType(increasegrades.CourseID),
             GradesID: convertType(increasegrades.GradesID),
-            GradePoint: +(increasegrades.GradePoint ?? ""),
+            Grade_point: convertType(increasegrades.GradePoint),
             Description: increasegrades.Description ?? "",
             Date: selectedDate || "",
         };
@@ -177,197 +186,199 @@ function IncreaseGradesCreate() {
     }
 
     return (
-        <Container className={classes.container} maxWidth="sm">
-            <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success">
-                    บันทึกสำเร็จ
-                </Alert>
-            </Snackbar>
-            <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error">
-                    การบันทึกผิดพลาด
-                </Alert>
-            </Snackbar>
-            <Paper className={classes.paper}>
-                <Box display="flex">
-                    <Box flexGrow={1}>
-                        <Typography
-                            component="h2"
-                            variant="h6"
-                            color="primary"
-                            gutterBottom
-                        >
-                            บันทึกผลการเรียน
-                        </Typography>
+        <div>
+            <NavBar />
+            <div className={classes.drawerHeader} />
+            <Container className={classes.container} maxWidth="sm">
+                <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        บันทึกสำเร็จ
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        การบันทึกผิดพลาด
+                    </Alert>
+                </Snackbar>
+                <Paper className={classes.paper}>
+                    <Box display="flex">
+                        <Box flexGrow={1}>
+                            <Typography
+                                component="h2"
+                                variant="h6"
+                                color="primary"
+                                gutterBottom
+                            >
+                                บันทึกผลการเรียน
+                            </Typography>
+                        </Box>
                     </Box>
-                </Box>
-                <Divider />
-                <Grid container spacing={3} className={classes.root}>
-                    <Grid item xs={12}>
-                        <FormControl fullWidth variant="outlined">
-                            <Typography
-                                color="textPrimary"
-                            >
-                                นักศึกษา
-                            </Typography>
-                            <Select
-                                native
-                                value={increasegrades.StudentID}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: "StudentID",
-                                }}
-                            >
-                                <option aria-label="None" value="">
-                                    กรุณาเลือกนักศึกษา
-                                </option>
-                                {students.map((item: StudentsInterface) => (
-                                    <option value={item.ID} key={item.ID}>
-                                        {item.ID_student} {item.Name}
+                    <Divider />
+                    <Grid container spacing={3} className={classes.root}>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth variant="outlined">
+                                <Typography
+                                    color="textPrimary"
+                                >
+                                    นักศึกษา
+                                </Typography>
+                                <Select
+                                    native
+                                    value={increasegrades.StudentID}
+                                    onChange={handleChange}
+                                    inputProps={{
+                                        name: "StudentID",
+                                    }}
+                                >
+                                    <option aria-label="None" value="">
+                                        กรุณาเลือกนักศึกษา
                                     </option>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                                    {students.map((item: StudentsInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.ID_student} {item.Name}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={12}>
-                        <FormControl fullWidth variant="outlined">
-                            <Typography
-                                color="textPrimary"
-                            >
-                                รหัสรายวิชา
-                            </Typography>
-                            <Select
-                                native
-                                value={increasegrades.CourseID}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: "CourseID",
-                                }}
-                            >
-                                <option aria-label="None" value="">
-                                    กรุณาเลือกรหัสรายวิชา
-                                </option>
-                                {courses.map((item: CoursesInterface) => (
-                                    <option value={item.ID} key={item.ID}>
-                                        {item.Coursenumber} {item.Coursename}
+                        <Grid item xs={12}>
+                            <FormControl fullWidth variant="outlined">
+                                <Typography
+                                    color="textPrimary"
+                                >
+                                    รหัสรายวิชา
+                                </Typography>
+                                <Select
+                                    native
+                                    value={increasegrades.CourseID}
+                                    onChange={handleChange}
+                                    inputProps={{
+                                        name: "CourseID",
+                                    }}
+                                >
+                                    <option aria-label="None" value="">
+                                        กรุณาเลือกรหัสรายวิชา
                                     </option>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                                    {courses.map((item: CoursesInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.Coursenumber} {item.Coursename}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={12}>
-                        <FormControl fullWidth variant="outlined">
-                            <Typography
-                                color="textPrimary"
-                            >
-                                คะแนน
-                            </Typography>
-                            <option aria-label="None" value="">
-                                กรุณาใส่คะแนน
-                            </option>
-                            <TextField
-                                id="GradePoint"
-                                variant="outlined"
-                                type="number"
-                                size="medium"
-                                value={increasegrades.GradePoint || ""}
-                                onChange={handleInputChange}
-                            />
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormControl fullWidth variant="outlined">
-                            <Typography
-                                color="textPrimary"
-                            >
-                                ผลการเรียน
-                            </Typography>
-                            <Select
-                                native
-                                value={increasegrades.GradesID}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: "GradesID",
-                                }}
-                            >
+                        <Grid item xs={12}>
+                            <FormControl fullWidth variant="outlined">
+                                <Typography
+                                    color="textPrimary"
+                                >
+                                    คะแนน
+                                </Typography>
                                 <option aria-label="None" value="">
-                                    กรุณาเลือกผลการเรียน
+                                    กรุณาใส่คะแนน
                                 </option>
-                                {grades.map((item: GradesInterface) => (
-                                    <option value={item.ID} key={item.ID}>
-                                        {item.Grade}
-                                    </option>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormControl fullWidth variant="outlined">
-                            <Typography
-                                color="textPrimary"
-                            >
-                                เหตุผล
-                            </Typography>
-                            <option aria-label="None" value="">
-                                กรุณาใส่เหตุผล
-                            </option>
-                            <TextField
-                                id="Description"
-                                variant="outlined"
-                                type="string"
-                                size="medium"
-                                value={increasegrades.Description || ""}
-                                onChange={handleInputChange}
-                            />
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <FormControl fullWidth variant="outlined">
-                            <Typography
-                                color="textPrimary"
-                            >
-                                วันที่และเวลา
-                            </Typography>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <KeyboardDateTimePicker
-                                    name="Date"
-                                    value={selectedDate}
-                                    onChange={handleDateChange}
-                                    label="กรุณาเลือกวันที่และเวลา"
-                                    minDate={new Date("2018-01-01T00:00")}
-                                    format="yyyy/MM/dd hh:mm a"
+                                <TextField
+                                    id="GradePoint"
+                                    variant="outlined"
+                                    type="number"
+                                    size="medium"
+                                    value={increasegrades.GradePoint || ""}
+                                    onChange={handleInputChange}
                                 />
-                            </MuiPickersUtilsProvider>
-                        </FormControl>
-                    </Grid>
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={12}>
-                        <Button
-                            component={RouterLink}
-                            to="/increasegrade"
-                            variant="contained"
-                        >
-                            กลับ
-                        </Button>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth variant="outlined">
+                                <Typography
+                                    color="textPrimary"
+                                >
+                                    ผลการเรียน
+                                </Typography>
+                                <Select
+                                    native
+                                    value={increasegrades.GradesID}
+                                    onChange={handleChange}
+                                    inputProps={{
+                                        name: "GradesID",
+                                    }}
+                                >
+                                    <option aria-label="None" value="">
+                                        กรุณาเลือกผลการเรียน
+                                    </option>
+                                    {grades.map((item: GradesInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.Grade}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Grid>
 
-                        <Button
-                            style={{ float: "right" }}
-                            variant="contained"
-                            onClick={submit}
-                            color="primary"
-                        >
-                            บันทึก
-                        </Button>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth variant="outlined">
+                                <Typography
+                                    color="textPrimary"
+                                >
+                                    หมายเหตุ
+                                </Typography>
+                                <option aria-label="None" value="">
+                                    กรุณาใส่หมายเหตุ
+                                </option>
+                                <TextField
+                                    id="Description"
+                                    variant="outlined"
+                                    type="string"
+                                    size="medium"
+                                    value={increasegrades.Description || ""}
+                                    onChange={handleInputChange}
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <FormControl fullWidth variant="outlined">
+                                <Typography
+                                    color="textPrimary"
+                                >
+                                    วันที่และเวลา
+                                </Typography>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDateTimePicker
+                                        name="Date"
+                                        value={selectedDate}
+                                        onChange={handleDateChange}
+                                        label="กรุณาเลือกวันที่และเวลา"
+                                        minDate={new Date("2018-01-01T00:00")}
+                                        format="yyyy/MM/dd hh:mm a"
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Button
+                                component={RouterLink}
+                                to="/increasegrade"
+                                variant="contained"
+                            >
+                                กลับ
+                            </Button>
+
+                            <Button
+                                style={{ float: "right" }}
+                                variant="contained"
+                                onClick={submit}
+                                color="primary"
+                            >
+                                บันทึก
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Paper>
-        </Container>
+                </Paper>
+            </Container>
+        </div>
     );
 }
-
-export default IncreaseGradesCreate;

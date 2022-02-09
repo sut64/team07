@@ -14,6 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { IncreaseGradesInterface } from "../models/IIncreaseGrades";
 import { format } from 'date-fns'
+import NavBar from "./Navbar";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -26,10 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
         tableSpace: {
             marginTop: 20,
         },
+        drawerHeader: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+        },
     })
 );
 
-function IncreaseGrades() {
+export default function IncreaseGrades() {
     const classes = useStyles();
     const [increasegrades, setIncreaseGrades] = useState<IncreaseGradesInterface[]>([]);
 
@@ -42,7 +51,7 @@ function IncreaseGrades() {
         },
     };
 
-    const getIncreaseGrades= async () => {
+    const getIncreaseGrades = async () => {
         fetch(`${apiUrl}/increasegrades`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
@@ -61,6 +70,8 @@ function IncreaseGrades() {
 
     return (
         <div>
+            <NavBar />
+            <div className={classes.drawerHeader} />
             <Container className={classes.container} maxWidth="lg">
                 <Box display="flex">
                     <Box flexGrow={1}>
@@ -95,7 +106,7 @@ function IncreaseGrades() {
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
-                                    คะแนน
+                                    หน่วยกิต
                                 </TableCell>
                                 <TableCell align="center" width="5%">
                                     ผลการเรียน
@@ -126,5 +137,3 @@ function IncreaseGrades() {
         </div>
     );
 }
-
-export default IncreaseGrades;
