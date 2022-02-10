@@ -194,18 +194,18 @@ type RequestExam struct {
 type RecordPetition struct {
 	gorm.Model
 
-	Because          string
-	RegisteredCredit int
-	TimeRecord       time.Time
+	Because          string  `valid:"required~รูปแบบข้อมูลไม่ถูกต้อง,range(0|200)~รูปแบบข้อมูลไม่ถูกต้อง"`
+	RegisteredCredit int		`valid:"required~ข้อมูลหน่วยกิตไม่ถูกต้อง,range(1|25)~ข้อมูลหน่วยกิตไม่ถูกต้อง"`
+	TimeRecord       time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
 
 	StudentID *uint
-	Student   Student `gorm:"references:id"`
+	Student   Student `gorm:"references:id" valid:"-"`
 
 	PetitionID *uint
-	Petition   Petition `gorm:"references:id"`
+	Petition   Petition `gorm:"references:id" valid:"-"`
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"`
 }
 
 type IncreaseGrades struct {
