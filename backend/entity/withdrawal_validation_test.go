@@ -40,7 +40,7 @@ func TestYearTimeIsNot4Digit(t *testing.T) {
 }
 
 // ข้อมูลหน่วยกิตไม่ถูกต้อง ไม่เป็นจำนวนเต็มบวก
-func TestRemainCreditIsPosiviteNumber(t *testing.T) {
+func TestRemainCreditIsNotPosiviteNumber(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	wd := Withdrawal{
