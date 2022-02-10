@@ -131,7 +131,7 @@ export default function Withdrawals() {
                             {withdrawals.map((wd: WithdrawalsInterface) => (
                                 <TableRow key={wd.ID}>
                                     <TableCell align="center">{wd.Student.ID_student}</TableCell>
-                                    <TableCell align="center">{wd.RegisCourse.CourseID}</TableCell>
+                                    <TableCell align="center">{wd.RegisCourse.CourseID}  {wd.RegisCourse.Course.Coursename} </TableCell>
                                     <TableCell align="center">{wd.Teacher.Name}</TableCell>
                                     <TableCell align="center">{wd.Semester.Semester}</TableCell>
                                     <TableCell align="center">{wd.YearTime}</TableCell>
