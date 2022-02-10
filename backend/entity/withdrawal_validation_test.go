@@ -9,7 +9,7 @@ import (
 )
 
 // ข้อมูลถูกต้องหมดทุก field
-func TestPass(t *testing.T) {
+func TestWithdrawalPass(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	withdrawal := Withdrawal{
