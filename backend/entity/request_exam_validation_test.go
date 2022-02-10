@@ -73,7 +73,7 @@ func TestTelMustBeInValidPattern(t *testing.T) {
 }
 
 // ตรวจสอบวันเวลาต้องไม่เป็นวันเวลาปัจจุบัน
-func TestWatchTimeMustBePresent(t *testing.T) {
+func TestRequestTimeMustBePresent(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	requestexam := RequestExam{
