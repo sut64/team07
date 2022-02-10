@@ -3,8 +3,9 @@ package controller
 import (
 	"net/http"
 
-	"github.com/sut64/team07/entity"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
+	"github.com/sut64/team07/entity"
 )
 
 // POST /record_petitions
@@ -46,6 +47,12 @@ func CreateRecordPetition(c *gin.Context) {
 		TimeRecord: 	recordpetition.TimeRecord, // ตั้งค่าฟิลด์ TimeRecord
 		Because: 		recordpetition.Because,
 		RegisteredCredit: recordpetition.RegisteredCredit,	
+	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(rp); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	// 13: บันทึก
