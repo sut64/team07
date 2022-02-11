@@ -210,18 +210,18 @@ type RecordPetition struct {
 
 type IncreaseGrades struct {
 	gorm.Model
-	Date        time.Time
-	GradePoint  int
-	Description string
+	Date        time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
+	GradePoint  int       `valid:"range(0|100)~ข้อมูลคะแนนไม่ถูกต้อง, required~ข้อมูลคะแนนไม่ถูกต้อง"`
+	Description string    `valid:"stringlength(0|10)~ข้อมูลหมายเหตุไม่ถูกต้อง"`
 
 	StudentID *uint
-	Student   Student `gorm:"references:id"`
+	Student   Student `gorm:"references:id" valid:"-" `
 
 	GradesID *uint
-	Grades   Grades `gorm:"references:id"`
+	Grades   Grades `gorm:"references:id" valid:"-"`
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"`
 }
 
 func init() {
