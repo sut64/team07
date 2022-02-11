@@ -61,6 +61,7 @@ export default function IncreaseGradesCreate() {
 
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const apiUrl = "http://localhost:8080";
     const requestOptions = {
@@ -157,11 +158,13 @@ export default function IncreaseGradesCreate() {
             StudentID: convertType(increasegrades.StudentID),
             CourseID: convertType(increasegrades.CourseID),
             GradesID: convertType(increasegrades.GradesID),
-            Grade_point: convertType(increasegrades.GradePoint),
+            GradePoint: convertType(increasegrades.GradePoint),
             Description: increasegrades.Description ?? "",
             Date: selectedDate || "",
         };
         console.log(data)
+
+
 
         const requestOptionsPost = {
             method: "POST",
@@ -178,9 +181,11 @@ export default function IncreaseGradesCreate() {
                 if (res.data) {
                     console.log("บันทึกได้")
                     setSuccess(true);
+                    setErrorMessage("")
                 } else {
                     console.log("บันทึกไม่ได้")
                     setError(true);
+                    setErrorMessage(res.error)
                 }
             });
     }
@@ -197,7 +202,7 @@ export default function IncreaseGradesCreate() {
                 </Snackbar>
                 <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error">
-                        การบันทึกผิดพลาด
+                        บันทึกไม่สำเร็จ : {errorMessage}
                     </Alert>
                 </Snackbar>
                 <Paper className={classes.paper}>
