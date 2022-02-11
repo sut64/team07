@@ -47,7 +47,7 @@ func TestBecauseMustBeInRange(t *testing.T) {
 	g.Expect(err).ToNot(BeNil())
 
 	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal("รูปแบบข้อมูลไม่ถูกต้อง"))
+	g.Expect(err.Error()).To(Equal("ข้อมูลเหตุผลไม่ถูกต้อง"))
 }
 
 // ตรวจสอบเบอร์หน่วยกิตต้องเป็นตัวเลขและไม่ติดลบ
