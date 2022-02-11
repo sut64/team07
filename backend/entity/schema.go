@@ -194,8 +194,8 @@ type RequestExam struct {
 type RecordPetition struct {
 	gorm.Model
 
-	Because          string  `valid:"required~รูปแบบข้อมูลไม่ถูกต้อง,range(0|200)~รูปแบบข้อมูลไม่ถูกต้อง"`
-	RegisteredCredit int		`valid:"required~ข้อมูลหน่วยกิตไม่ถูกต้อง,range(1|25)~ข้อมูลหน่วยกิตไม่ถูกต้อง"`
+	Because          string    `valid:"required~ข้อมูลเหตุผลไม่ถูกต้อง,stringlength(0|200)~ข้อมูลเหตุผลไม่ถูกต้อง"`
+	RegisteredCredit int       `valid:"positive~ข้อมูลหน่วยกิตไม่ถูกต้อง, required~ข้อมูลหน่วยกิตไม่ถูกต้อง"`
 	TimeRecord       time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
 
 	StudentID *uint
