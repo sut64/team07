@@ -54,7 +54,7 @@ func TestDateMustBePresent(t *testing.T) {
 func TestGradePointMustBeInRange(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-		ig := IncreaseGrades{
+	ig := IncreaseGrades{
 		Date:        time.Now(),
 		GradePoint:  111, //ผิด
 		Description: "so good",
@@ -79,7 +79,7 @@ func TestDescriptionMustBeInValidPattern(t *testing.T) {
 	ig := IncreaseGrades{
 		Date:        time.Now(),
 		GradePoint:  100,
-		Description: "So_Good!", //ผิด
+		Description: "goodddddddddd", //ผิด
 	}
 
 	ok, err := govalidator.ValidateStruct(ig)
