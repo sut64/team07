@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/sut64/team07/entity"
 )
@@ -39,7 +40,7 @@ func CreateIncreaseGrades(c *gin.Context) {
 		return
 	}
 	// 12: สร้าง IncreaseGrades
-	pm := entity.IncreaseGrades{
+	ig := entity.IncreaseGrades{
 		Grades:      Grades,  // โยงความสัมพันธ์กับ Entity Semester
 		Course:      Course,  // โยงความสัมพันธ์กับ Entity Course
 		Student:     Student, // โยงความสัมพันธ์กับ Entity ExamType
@@ -48,12 +49,18 @@ func CreateIncreaseGrades(c *gin.Context) {
 		Description: IncreaseGrades.Description,
 	}
 
-	// 13: บันทึก
-	if err := entity.DB().Create(&pm).Error; err != nil {
+	//แทรกการ validate ข้อมูล
+	if _, err := govalidator.ValidateStruct(ig); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": pm})
+
+	// 13: บันทึก
+	if err := entity.DB().Create(&ig).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": ig})
 }
 
 // GET /IncreaseGrades/:id
