@@ -1,4 +1,4 @@
- package entity
+package entity
 
 import (
 	"testing"
@@ -27,7 +27,7 @@ func TestRequestExamPass(t *testing.T) {
 	g.Expect(err).To(BeNil())
 }
 
-// ตรวจสอบปีการศึกษาต้องเป็นตัวเลขที่อยู่ในช่วง 2500-2600
+// ตรวจสอบปีการศึกษาต้องเป็นตัวเลขที่อยู่ในช่วง 2500 ถึง 2600
 func TestAcademicYearMustBeInRange(t *testing.T) {
 	g := NewGomegaWithT(t)
 
