@@ -106,7 +106,7 @@ export default function IncreaseGrades() {
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
-                                    หน่วยกิต
+                                    คะแนน
                                 </TableCell>
                                 <TableCell align="center" width="5%">
                                     ผลการเรียน
