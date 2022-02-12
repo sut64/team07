@@ -30,7 +30,7 @@ export default function Home() {
       <div className={classes.drawerHeader} />
       <Container className={classes.container} maxWidth="md">
         <h1 style={{ textAlign: "center" }}>ระบบลงทะเบียนเรียน</h1>
-        <h2>ยินดีต้อนรับสู่ระบบลงทะเรียน</h2>
+        <h2 style={{ textAlign: "center" }}>ยินดีต้อนรับสู่ระบบลงทะเรียน</h2>
       </Container>
     </div>
   );

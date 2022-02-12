@@ -117,20 +117,20 @@ type AddCourse struct {
 
 type ExamSchedule struct {
 	gorm.Model
-	AcademicYear int16
-	RoomExam     string
-	ExamDate     time.Time
+	AcademicYear int16   `valid:"range(2000|3000)~ปีการศึกษาต้องเป็นตัวเลข 4 หลัก, required~ปีการศึกษาต้องเป็นตัวเลข 4 หลัก"`
+	RoomExam     string `valid:"matches(^[B]\\d{4}$)~ข้อมูลห้องสอบไม่ถูกต้อง, required~ข้อมูลห้องสอบไม่ถูกต้อง"`
+	ExamDate     time.Time `valid:"future~วันที่สอบต้องเป็นวันในอนาคต"`
 	StartTime    time.Time
-	EndTime      time.Time
+	EndTime      time.Time `valid:"future~เวลาสิ้นสุดไม่ถูกต้อง"`
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"`
 
 	ExamTypeID *uint
-	ExamType   ExamType `gorm:"references:id"`
+	ExamType   ExamType `gorm:"references:id" valid:"-"`
 
 	SemesterID *uint
-	Semester   Semester `gorm:"references:id"`
+	Semester   Semester `gorm:"references:id" valid:"-"`
 }
 
 type RegisCourse struct {

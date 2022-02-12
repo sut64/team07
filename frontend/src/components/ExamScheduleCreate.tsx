@@ -72,6 +72,7 @@ export default function ExamScheduleCreate() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
@@ -110,8 +111,16 @@ export default function ExamScheduleCreate() {
 
   const handleDateChange = (date: Date | null) => {
     console.log(date);
-    setSelectedDate(date);
+    setSelectedDate(date); 
+  };
+
+  const handleStartTimeChange = (date: Date | null) => {
+    console.log(date);
     setSelectedTimeStart(date)
+  };
+
+  const handleEndTimeChange = (date: Date | null) => {
+    console.log(date);
     setSelectedTimeEnd(date)
   };
 
@@ -192,8 +201,10 @@ export default function ExamScheduleCreate() {
       .then((res) => {
         if (res.data) {
           setSuccess(true);
+          setErrorMessage("");
         } else {
           setError(true);
+          setErrorMessage(res.error);
         }
       });
   }
@@ -210,7 +221,7 @@ export default function ExamScheduleCreate() {
         </Snackbar>
         <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error">
-            บันทึกตารางสอบไม่สำเร็จ
+            บันทึกตารางสอบไม่สำเร็จ {errorMessage}
           </Alert>
         </Snackbar>
         <Paper className={classes.paper}>
@@ -343,7 +354,7 @@ export default function ExamScheduleCreate() {
                   <KeyboardTimePicker
                     name="StartTime"
                     value={selectTimeStart}
-                    onChange={handleDateChange}
+                    onChange={handleStartTimeChange}
                     label="กรุณาเลือกเวลาเริ่มต้น"
                     format="hh:mm a"
                   />
@@ -357,7 +368,7 @@ export default function ExamScheduleCreate() {
                   <KeyboardTimePicker
                     name="EndTime"
                     value={selectedTimeend}
-                    onChange={handleDateChange}
+                    onChange={handleEndTimeChange}
                     label="กรุณาเลือกเวลาสิ้นสุด"
                     format="hh:mm a"
                   />
