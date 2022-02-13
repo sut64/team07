@@ -16,8 +16,8 @@ func TestExamSchdulePass(t *testing.T) {
 		AcademicYear: 2564,
 		RoomExam: "B5204",
 		ExamDate: time.Now().Add(time.Hour*24),
-		StartTime: time.Now(),
-		EndTime: time.Now().Add(time.Hour*24),
+		StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
+		EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
 		
 	}
 	// ตรวจสอบด้วย govalidator
@@ -38,8 +38,8 @@ func TestAcademicYearMustBeInValidPattern(t *testing.T) {
 			AcademicYear: 0, //ผิด
 			RoomExam: "B5204", 
 			ExamDate: time.Now().Add(time.Hour*24),
-			StartTime: time.Now(),
-			EndTime: time.Now().Add(time.Hour*24),
+			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
+			EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
 		}
 
 		ok, err := govalidator.ValidateStruct(examschedule)
@@ -75,8 +75,8 @@ func TestRoomExamMustBeInValidPattern(t *testing.T) {
 			AcademicYear: 2564,
 			RoomExam: fixture, //ผิด
 			ExamDate: time.Now().Add(time.Hour*24),
-			StartTime: time.Now(),
-			EndTime: time.Now().Add(time.Hour*24),
+			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
+			EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
 		}
 
 		ok, err := govalidator.ValidateStruct(examschedule)
@@ -106,8 +106,8 @@ func TestDateExamMustBeFuture(t *testing.T) {
 			AcademicYear: 2564,
 			RoomExam: "B5204",
 			ExamDate: fixture,
-			StartTime: time.Now(),
-			EndTime: time.Now().Add(time.Hour*24),
+			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
+			EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
 		}
 
 		// ตรวจสอบด้วย govalidator
@@ -124,26 +124,3 @@ func TestDateExamMustBeFuture(t *testing.T) {
 	}
 }
 
-func TestEndTime(t *testing.T) {
-	g := NewGomegaWithT(t)
-
-		examschedule := ExamSchedule{
-			AcademicYear: 2564,
-			RoomExam: "B5204", 
-			ExamDate: time.Now().Add(time.Hour*24),
-			StartTime: time.Now(),
-			EndTime: time.Now().Add(time.Hour*-24),
-		}
-
-		ok, err := govalidator.ValidateStruct(examschedule)
-
-		// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
-		g.Expect(ok).ToNot(BeTrue())
-
-		// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
-		g.Expect(err).ToNot(BeNil())
-
-		// err.Error ต้องมี error message แสดงออกมา
-		g.Expect(err.Error()).To(Equal("เวลาสิ้นสุดไม่ถูกต้อง"))
-	
-}
