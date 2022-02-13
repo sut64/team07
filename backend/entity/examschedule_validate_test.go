@@ -88,7 +88,7 @@ func TestRoomExamMustBeInValidPattern(t *testing.T) {
 		g.Expect(err).ToNot(BeNil())
 
 		// err.Error ต้องมี error message แสดงออกมา
-		g.Expect(err.Error()).To(Equal("ข้อมูลห้องสอบไม่ถูกต้อง"))
+		g.Expect(err.Error()).To(Equal("ห้องสอบต้องขึ้นต้นด้วย B และตามด้วยตัวเลข 4 ตัว"))
 	}
 }
 
