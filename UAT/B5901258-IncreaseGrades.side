@@ -551,32 +551,23 @@
     }]
   }, {
     "id": "603393f9-d787-404c-a90d-919262397a62",
-    "name": "B5901258-ตรวจสอบหมายเหตุ Description ต้องมี length ไม่เกิน 10 ตัวอักษร (1)",
+    "name": "B5901258-ตรวจสอบหมายเหตุ Description ต้องมี length ไม่เกิน 50 ตัวอักษร ",
     "commands": [{
-      "id": "65dbb5cb-c482-453b-9384-4a375c410f2b",
+      "id": "668a1c75-3be5-4175-98ae-f4fa23cf6085",
       "comment": "",
       "command": "open",
       "target": "http://localhost:3000/",
       "targets": [],
       "value": ""
     }, {
-      "id": "1b751adf-7cb7-4f9a-8801-c9bf7e9dd6b8",
+      "id": "a07a7f55-41e4-4b90-8b28-43649423c588",
       "comment": "",
       "command": "setWindowSize",
-      "target": "1382x784",
+      "target": "697x768",
       "targets": [],
       "value": ""
     }, {
-      "id": "4b81cfc6-0000-4d1f-80ad-e55360513c81",
-      "comment": "",
-      "command": "mouseOver",
-      "target": "css=.makeStyles-menuButton-23 .MuiSvgIcon-root",
-      "targets": [
-        ["css=.makeStyles-menuButton-23 .MuiSvgIcon-root", "css:finder"]
-      ],
-      "value": ""
-    }, {
-      "id": "ff7caeea-d6a5-41db-92fb-ed9b2b57b07a",
+      "id": "26ab9308-202d-4af3-bf18-95a5279340cf",
       "comment": "",
       "command": "click",
       "target": "css=.makeStyles-menuButton-23 .MuiSvgIcon-root",
@@ -585,16 +576,7 @@
       ],
       "value": ""
     }, {
-      "id": "13a5f474-e47f-473d-b4f4-0d5ea3801bd2",
-      "comment": "",
-      "command": "mouseOut",
-      "target": "css=.makeStyles-menuButton-23 .MuiSvgIcon-root",
-      "targets": [
-        ["css=.makeStyles-menuButton-23 .MuiSvgIcon-root", "css:finder"]
-      ],
-      "value": ""
-    }, {
-      "id": "e7426317-e780-4b0b-a955-3194eb658292",
+      "id": "6c93511c-fea2-4e3f-8e80-7d8f39d58758",
       "comment": "",
       "command": "click",
       "target": "css=.makeStyles-a-28:nth-child(4) .MuiTypography-root",
@@ -606,7 +588,19 @@
       ],
       "value": ""
     }, {
-      "id": "1f95207b-b155-4b85-8684-805ea65ffc3e",
+      "id": "d38b6932-705c-4359-aadb-104a09b64276",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.makeStyles-a-28:nth-child(4) .MuiTypography-root",
+      "targets": [
+        ["css=.makeStyles-a-28:nth-child(4) .MuiTypography-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/div/div/div/div/ul/a[4]/div/div[2]/span", "xpath:idRelative"],
+        ["xpath=//a[4]/div/div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'เพิ่มผลการเรียนนักศึกษา')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0e14802-ac55-40d2-bdeb-945a25bd0045",
       "comment": "",
       "command": "mouseOver",
       "target": "css=.MuiButton-contained > .MuiButton-label",
@@ -617,7 +611,7 @@
       ],
       "value": ""
     }, {
-      "id": "444843c9-6365-4ade-ac88-42a718b95b38",
+      "id": "4022f7be-8529-42db-a794-24f875b410c5",
       "comment": "",
       "command": "click",
       "target": "css=.MuiButton-contained > .MuiButton-label",
@@ -628,7 +622,7 @@
       ],
       "value": ""
     }, {
-      "id": "77e993c7-ef2f-4b50-8c2f-d10f17dd714f",
+      "id": "4cdda053-27a5-41fc-8df3-9fab941a970a",
       "comment": "",
       "command": "click",
       "target": "name=StudentID",
@@ -641,14 +635,14 @@
       ],
       "value": ""
     }, {
-      "id": "f489d649-14b8-4093-841c-737ab64e8980",
+      "id": "7960c40b-5ca0-48d2-a3a3-a7d98bde2ae4",
       "comment": "",
       "command": "select",
       "target": "name=StudentID",
       "targets": [],
-      "value": "label=B6230760 Patnarin Aiewchoei"
+      "value": "label=B5901258 Khuptawuttinun"
     }, {
-      "id": "5bfb92ef-c0fe-4d76-84c4-8a1975109d6f",
+      "id": "4f265378-802f-4c9c-b613-ace55573f6b3",
       "comment": "",
       "command": "click",
       "target": "name=CourseID",
@@ -661,14 +655,14 @@
       ],
       "value": ""
     }, {
-      "id": "c7aaccfa-b54d-4429-946f-98de48356ac9",
+      "id": "139694fd-15a9-4452-b326-3109328e912d",
       "comment": "",
       "command": "select",
       "target": "name=CourseID",
       "targets": [],
-      "value": "label=523352 COMPUTER AND COMMUNICATION"
+      "value": "label=523301 COMPUTER STATISTICS"
     }, {
-      "id": "466d4eaf-fd0f-4fe9-9966-7000476b6e48",
+      "id": "e0d7f604-9784-4d74-9914-3831e551f787",
       "comment": "",
       "command": "click",
       "target": "id=GradePoint",
@@ -681,7 +675,7 @@
       ],
       "value": ""
     }, {
-      "id": "b304689f-ba59-450c-80f2-ef8ebe990294",
+      "id": "50af64cb-718e-4b8d-9e08-5c45fdaf040d",
       "comment": "",
       "command": "type",
       "target": "id=GradePoint",
@@ -694,7 +688,7 @@
       ],
       "value": "100"
     }, {
-      "id": "8e8f66bb-3e40-4b71-b430-f11f26bca604",
+      "id": "7b891ed3-bd53-4983-a315-bffd751b1939",
       "comment": "",
       "command": "click",
       "target": "name=GradesID",
@@ -707,14 +701,14 @@
       ],
       "value": ""
     }, {
-      "id": "a9e01af1-8e45-4196-89e0-f55b1a3e910a",
+      "id": "81c50155-8a1f-4aea-b539-b6167a281a91",
       "comment": "",
       "command": "select",
       "target": "name=GradesID",
       "targets": [],
       "value": "label=A"
     }, {
-      "id": "2669cc10-d81b-4605-aa7e-a2f8f1e5f5bf",
+      "id": "03c3f7f7-a4de-4109-9fe6-b351b4b20078",
       "comment": "",
       "command": "click",
       "target": "id=Description",
@@ -727,19 +721,7 @@
       ],
       "value": ""
     }, {
-      "id": "423c5ae1-1921-4f7f-b166-2ed44b8c130e",
-      "comment": "",
-      "command": "mouseOver",
-      "target": "css=.MuiButton-containedPrimary > .MuiButton-label",
-      "targets": [
-        ["css=.MuiButton-containedPrimary > .MuiButton-label", "css:finder"],
-        ["xpath=//div[@id='root']/div/div/div[3]/div/div[2]/div[7]/button/span", "xpath:idRelative"],
-        ["xpath=//div[7]/button/span", "xpath:position"],
-        ["xpath=//span[contains(.,'บันทึก')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "6943d2a3-b4ed-45d2-8606-534e701720c1",
+      "id": "5018fdbb-0587-4bd5-9945-73f724788a15",
       "comment": "",
       "command": "type",
       "target": "id=Description",
@@ -750,9 +732,9 @@
         ["xpath=//div[@id='root']/div/div/div[3]/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
         ["xpath=//div[5]/div/div/div/input", "xpath:position"]
       ],
-      "value": "aaaaaaaaaaaaa"
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     }, {
-      "id": "c9515f37-cdc8-45fc-a656-e9b93a5df7ea",
+      "id": "67b2c754-f0b5-4cb4-be00-bc87eaa720aa",
       "comment": "",
       "command": "click",
       "target": "css=.MuiButton-containedPrimary > .MuiButton-label",
@@ -764,19 +746,14 @@
       ],
       "value": ""
     }, {
-      "id": "b3270cec-356d-43c1-a37a-481dfee38d92",
+      "id": "370e2cde-604f-4350-9433-50e4eddcd557",
       "comment": "",
-      "command": "mouseOut",
-      "target": "css=.MuiButton-containedPrimary > .MuiButton-label",
-      "targets": [
-        ["css=.MuiButton-containedPrimary > .MuiButton-label", "css:finder"],
-        ["xpath=//div[@id='root']/div/div/div[3]/div[2]/div[2]/div[7]/button/span", "xpath:idRelative"],
-        ["xpath=//div[7]/button/span", "xpath:position"],
-        ["xpath=//span[contains(.,'บันทึก')]", "xpath:innerText"]
-      ],
+      "command": "runScript",
+      "target": "window.scrollTo(0,199)",
+      "targets": [],
       "value": ""
     }, {
-      "id": "f534d534-b8bb-4d18-a9c1-a81874b17ed1",
+      "id": "d6d3f3b2-d079-4b06-897a-ecfd37b56d99",
       "comment": "",
       "command": "click",
       "target": "css=.MuiAlert-message",
@@ -787,18 +764,7 @@
       ],
       "value": ""
     }, {
-      "id": "f642cdad-43c6-4c7b-af78-da17ea3b2a61",
-      "comment": "",
-      "command": "click",
-      "target": "css=.MuiAlert-root",
-      "targets": [
-        ["css=.MuiAlert-root", "css:finder"],
-        ["xpath=//div[@id='root']/div/div/div[3]/div/div", "xpath:idRelative"],
-        ["xpath=//div[3]/div/div", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "0e9e244e-c334-450e-90ee-82606ae3311c",
+      "id": "6343e1fa-f7b7-4550-a84a-feb06529dcc3",
       "comment": "",
       "command": "assertText",
       "target": "css=.MuiAlert-message",
@@ -809,7 +775,7 @@
       ],
       "value": "บันทึกไม่สำเร็จ : ข้อมูลหมายเหตุไม่ถูกต้อง"
     }, {
-      "id": "d1e9dc6e-16fb-4c55-9c3f-5ca3e4ccde50",
+      "id": "f34d28f4-eb62-4774-93e4-47ad864dad04",
       "comment": "",
       "command": "close",
       "target": "",
