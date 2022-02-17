@@ -27,49 +27,69 @@ func TestRequestExamPass(t *testing.T) {
 	g.Expect(err).To(BeNil())
 }
 
-// ตรวจสอบปีการศึกษาต้องเป็นตัวเลขที่อยู่ในช่วง 2500 ถึง 2600
+// ตรวจสอบปีการศึกษาต้องเป็นตัวเลขที่อยู่ในช่วง 2500 ถึง 2800
 func TestAcademicYearMustBeInRange(t *testing.T) {
 	g := NewGomegaWithT(t)
-
-	requestexam := RequestExam{
-		AcademicYear: 2400, //ผิด
-		Tel:          "0941548155",
-		RequestTime:  time.Now(),
+	fixtures := []int{
+		-2564,
+		3000,
+		0000,
+		0,
 	}
 
-	ok, err := govalidator.ValidateStruct(requestexam)
+	for _, fixture := range fixtures {
+		requestexam := RequestExam{
+			AcademicYear: fixture, //ผิด
+			Tel:          "0941548155",
+			RequestTime:  time.Now(),
+		}
 
-	// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
-	g.Expect(ok).ToNot(BeTrue())
+		ok, err := govalidator.ValidateStruct(requestexam)
 
-	// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
-	g.Expect(err).ToNot(BeNil())
+		// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
+		g.Expect(ok).ToNot(BeTrue())
 
-	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal("ข้อมูลปีการศึกษาไม่ถูกต้อง"))
+		// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
+		g.Expect(err).ToNot(BeNil())
+
+		// err.Error ต้องมี error message แสดงออกมา
+		g.Expect(err.Error()).To(Equal("ข้อมูลปีการศึกษาไม่ถูกต้อง"))
+	}
 }
 
-// ตรวจสอบเบอร์ติดต่อต้องขึ้นต้นด้วย 0 ตามด้วย 6,8,9 และตามด้วย 0-9 จำนวน 8 ตัว
+// ตรวจสอบเบอร์ติดต่อต้องขึ้นต้นด้วย '0' ตามด้วย '6','8','9' และตามด้วย '0' - '9' จำนวน 8 ตัว
 func TestTelMustBeInValidPattern(t *testing.T) {
 	g := NewGomegaWithT(t)
-
-	requestexam := RequestExam{
-		AcademicYear: 2564,
-		Tel:          "029058901", //ผิด
-		RequestTime:  time.Now(),
+	fixtures := []string{
+		"",            // เป็นค่าว่าง
+		"0000000000",  // เป็น 0
+		"0200000000",  // ขึ้นต้นด้วย 0 ตามด้วย 2 และตามด้วย string 8 ตัว
+		"090-0000000", // มีขีดคั่น
+		"080000000",   // ขึ้นต้นด้วย 0 ตามด้วย 8 และตามด้วย string 7 ตัว
+		"9912345678",  // ขึ้นต้นด้วย 9
+		"090",         // ตัวอักษร 3 ตัว
+		"0",           // ตัวอักษร 1 ตัว
 	}
 
-	// ตรวจสอบด้วย govalidator
-	ok, err := govalidator.ValidateStruct(requestexam)
+	for _, fixture := range fixtures {
+		requestexam := RequestExam{
+			AcademicYear: 2564,
+			Tel:          fixture, //ผิด
+			RequestTime:  time.Now(),
+		}
 
-	// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
-	g.Expect(ok).ToNot(BeTrue())
+		// ตรวจสอบด้วย govalidator
+		ok, err := govalidator.ValidateStruct(requestexam)
 
-	// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
-	g.Expect(err).ToNot(BeNil())
+		// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
+		g.Expect(ok).ToNot(BeTrue())
 
-	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal("ข้อมูลเบอร์ติดต่อไม่ถูกต้อง"))
+		// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
+		g.Expect(err).ToNot(BeNil())
+
+		// err.Error ต้องมี error message แสดงออกมา
+		g.Expect(err.Error()).To(Equal("ข้อมูลเบอร์ติดต่อไม่ถูกต้อง"))
+	}
 }
 
 // ตรวจสอบวันเวลาต้องไม่เป็นวันเวลาปัจจุบัน
