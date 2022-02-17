@@ -79,7 +79,7 @@ func TestDescriptionMustBeInValidPattern(t *testing.T) {
 	ig := IncreaseGrades{
 		Date:        time.Now(),
 		GradePoint:  100,
-		Description: "goodddddddddd", //ผิด
+		Description: "gooddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", //ผิด
 	}
 
 	ok, err := govalidator.ValidateStruct(ig)

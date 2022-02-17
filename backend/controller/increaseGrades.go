@@ -22,15 +22,15 @@ func CreateIncreaseGrades(c *gin.Context) {
 		return
 	}
 
-	// 9: ค้นหา Course ด้วย id
-	if tx := entity.DB().Where("id = ?", IncreaseGrades.CourseID).First(&Course); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
+	// 9: ค้นหา Student ด้วย id
+	if tx := entity.DB().Where("id = ?", IncreaseGrades.StudentID).First(&Student); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Student not found"})
 		return
 	}
 
-	// 10: ค้นหา Student ด้วย id
-	if tx := entity.DB().Where("id = ?", IncreaseGrades.StudentID).First(&Student); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Student not found"})
+	// 10: ค้นหา Course ด้วย id
+	if tx := entity.DB().Where("id = ?", IncreaseGrades.CourseID).First(&Course); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
 		return
 	}
 
