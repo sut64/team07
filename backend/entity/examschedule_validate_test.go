@@ -34,8 +34,19 @@ func TestExamSchdulePass(t *testing.T) {
 func TestAcademicYearMustBeInValidPattern(t *testing.T) {
 	g := NewGomegaWithT(t)
 
+	fixtures := []int{
+		-2564,
+		1,
+		12,
+		123,
+		12345,
+		123456,
+		0,
+	}
+
+	for _, fixture := range fixtures {
 		examschedule := ExamSchedule{
-			AcademicYear: 0, //ผิด
+			AcademicYear: fixture, //ผิด
 			RoomExam: "B5204", 
 			ExamDate: time.Now().Add(time.Hour*24),
 			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
@@ -52,7 +63,7 @@ func TestAcademicYearMustBeInValidPattern(t *testing.T) {
 
 		// err.Error ต้องมี error message แสดงออกมา
 		g.Expect(err.Error()).To(Equal("ปีการศึกษาต้องเป็นตัวเลข 4 หลัก"))
-	
+	}
 }	
 
 // ตรวจสอบห้องสอบต้องขึ้นต้นด้วย B และตามด้วยตัวเลข 4 ตัว

@@ -117,7 +117,7 @@ type AddCourse struct {
 
 type ExamSchedule struct {
 	gorm.Model
-	AcademicYear int16     `valid:"range(2000|3000)~ปีการศึกษาต้องเป็นตัวเลข 4 หลัก, required~ปีการศึกษาต้องเป็นตัวเลข 4 หลัก"`
+	AcademicYear int     `valid:"range(2500|2800)~ปีการศึกษาต้องเป็นตัวเลข 4 หลัก, required~ปีการศึกษาต้องเป็นตัวเลข 4 หลัก"`
 	RoomExam     string    `valid:"matches(^[B]\\d{4}$)~ห้องสอบต้องขึ้นต้นด้วย B และตามด้วยตัวเลข 4 ตัว, required~ห้องสอบต้องขึ้นต้นด้วย B และตามด้วยตัวเลข 4 ตัว"`
 	ExamDate     time.Time `valid:"future~วันที่สอบต้องเป็นวันในอนาคต"`
 	StartTime    time.Time
