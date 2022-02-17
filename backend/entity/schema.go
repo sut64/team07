@@ -212,7 +212,7 @@ type IncreaseGrades struct {
 	gorm.Model
 	Date        time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
 	GradePoint  int       `valid:"range(0|100)~ข้อมูลคะแนนไม่ถูกต้อง, required~ข้อมูลคะแนนไม่ถูกต้อง"`
-	Description string    `valid:"length(0|10)~ข้อมูลหมายเหตุไม่ถูกต้อง"`
+	Description string    `valid:"length(0|50)~ข้อมูลหมายเหตุไม่ถูกต้อง"`
 
 	StudentID *uint
 	Student   Student `gorm:"references:id" valid:"-" `
