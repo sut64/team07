@@ -27,27 +27,35 @@ func TestRecordPetitionPass(t *testing.T) {
 	g.Expect(err).To(BeNil())
 }
 
-// ตรวจสอบเหตุผลที่ต้องการลงทะเบียนเรียนเกิน/ต่ำกว่าหน่วยกิตที่กำหนด ตัวอักษรไม่เกิน 200 ตัวอักษร
+// ตรวจสอบเหตุผลที่ต้องการลงทะเบียนเรียนเกิน/ต่ำกว่าหน่วยกิตที่กำหนด ไม่เป็นค่าว่าง ตัวอักษรไม่เกิน 200 ตัวอักษร
 func TestBecauseMustBeInRange(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	recordpetition := RecordPetition{
+	fixtures := []string{
 
-		Because:          "", //ผิด
-		RegisteredCredit: 24,
-		TimeRecord:       time.Now(),
+		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", // ตัวอักษรเกิน 200 ตัวอักษร
+		"", //    ค่าว่าง
 	}
 
-	ok, err := govalidator.ValidateStruct(recordpetition)
+	for _, fixture := range fixtures {
+		recordpetition := RecordPetition{
 
-	// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
-	g.Expect(ok).ToNot(BeTrue())
+			Because:          fixture, //ผิด
+			RegisteredCredit: 24,
+			TimeRecord:       time.Now(),
+		}
 
-	// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
-	g.Expect(err).ToNot(BeNil())
+		ok, err := govalidator.ValidateStruct(recordpetition)
 
-	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal("ข้อมูลเหตุผลไม่ถูกต้อง"))
+		// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
+		g.Expect(ok).ToNot(BeTrue())
+
+		// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
+		g.Expect(err).ToNot(BeNil())
+
+		// err.Error ต้องมี error message แสดงออกมา
+		g.Expect(err.Error()).To(Equal("ข้อมูลเหตุผลไม่ถูกต้อง"))
+	}
 }
 
 // ตรวจสอบเบอร์หน่วยกิตต้องเป็นตัวเลขและไม่ติดลบ
@@ -73,7 +81,7 @@ func TestRegisteredCreditMustBeInValidPattern(t *testing.T) {
 	g.Expect(err.Error()).To(Equal("ข้อมูลหน่วยกิตไม่ถูกต้อง"))
 }
 
-// ตรวจสอบวันเวลาต้องไม่เป็นวันเวลาปัจจุบัน
+// ตรวจสอบวันเวลาต้องไม่เป็นวันเวลาในอดีต
 func TestRecordTimeMustBePresent(t *testing.T) {
 	g := NewGomegaWithT(t)
 
