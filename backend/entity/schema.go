@@ -101,7 +101,7 @@ type Petition struct {
 
 type AddCourse struct {
 	gorm.Model
-	Credit   int16     `valid:"range(1|4)~ข้อมูลหน่วยกิตผิดพลาด"`
+	Credit   int16     `valid:"range(1|4)~ข้อมูลหน่วยกิตผิดพลาด, required~ข้อมูลหน่วยกิตผิดพลาด"`
 	DayTime  string    `valid:"required~ข้อมูลวันที่และเวลาที่สอนผิดพลาด"`
 	SaveTime time.Time `valid:"DelayNow3Min~ข้อมูลวันที่และเวลาที่บันทึกผิดพลาด"`
 
