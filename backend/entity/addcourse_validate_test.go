@@ -79,6 +79,7 @@ func TestCreditMustBeInRange(t *testing.T) {
 	fixtures := []int16{
 		10,
 		-5,
+		0,
 	}
 	for _, fixture := range fixtures{
 		addcourse := AddCourse{
