@@ -76,12 +76,18 @@ func TestSaveTimeMustNotBePast(t *testing.T) {
 func TestCreditMustBeInRange(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	addcourse := AddCourse{
-		Credit:   10, //ผิด
+	fixtures := []int16{
+		10,
+		-5,
+	}
+	for _, fixture := range fixtures{
+		addcourse := AddCourse{
+		Credit:   fixture, //ผิด
 		DayTime:  "TUE 18.00-21.00",
 		SaveTime: time.Now(),
+		
 	}
-
+	
 		ok, err := govalidator.ValidateStruct(addcourse)
 
 		// ok ต้องไม่เป็น true แปลว่าต้องจับ error ได้
@@ -92,5 +98,5 @@ func TestCreditMustBeInRange(t *testing.T) {
 
 		// err.Error() ต้องมี message แสดงออกมา
 		g.Expect(err.Error()).To(Equal("ข้อมูลหน่วยกิตผิดพลาด"))
-
+	}
 }

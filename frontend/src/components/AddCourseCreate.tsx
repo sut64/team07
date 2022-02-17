@@ -238,7 +238,7 @@ export default function AddCourseCreate() {
                   }}
                 >
                   <option aria-label="None" value="">
-                    กรุณาเลือกรหัสรายวิชา
+                    กรุณาเลือกรายวิชา
                   </option>
                   {courses.map((item: CoursesInterface) => (
                     <option value={item.ID} key={item.ID}>
