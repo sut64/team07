@@ -160,7 +160,7 @@ type Withdrawal struct {
 	SemesterID *uint
 	Semester   Semester `gorm:"references:id" valid:"-"`
 
-	YearTime       int       `valid:"range(2000|3000)~ข้อมูลปีการศึกษาผิดพลาด, required~ข้อมูลปีการศึกษาผิดพลาด"`
+	YearTime       int       `valid:"range(2500|2800)~ข้อมูลปีการศึกษาผิดพลาด, required~ข้อมูลปีการศึกษาผิดพลาด"`
 	RemainCredit   int       `valid:"positive~ข้อมูลหน่วยกิตไม่ถูกต้อง, required~ข้อมูลหน่วยกิตไม่ถูกต้อง"`
 	Reason         string    `valid:"required~ข้อมูลเหตุผลไม่ถูกต้อง"`
 	WithdrawalTime time.Time `valid:"present~ข้อมูลวันเวลาไม่ถูกต้อง"`
