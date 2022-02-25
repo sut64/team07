@@ -8,13 +8,13 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestExamSchdulePass(t *testing.T) {
+func TestExamSchedulePass(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	// ข้อมูลถูกต้องหมดทุก field
 	examschedule := ExamSchedule{
 		AcademicYear: 2564,
-		RoomExam: "B5204",
+		ExamRoom: "B5204",
 		ExamDate: time.Now().Add(time.Hour*24),
 		StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
 		EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
@@ -47,7 +47,7 @@ func TestAcademicYearMustBeInValidPattern(t *testing.T) {
 	for _, fixture := range fixtures {
 		examschedule := ExamSchedule{
 			AcademicYear: fixture, //ผิด
-			RoomExam: "B5204", 
+			ExamRoom: "B5204", 
 			ExamDate: time.Now().Add(time.Hour*24),
 			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
 			EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
@@ -67,7 +67,7 @@ func TestAcademicYearMustBeInValidPattern(t *testing.T) {
 }	
 
 // ตรวจสอบห้องสอบต้องขึ้นต้นด้วย B และตามด้วยตัวเลข 4 ตัว
-func TestRoomExamMustBeInValidPattern(t *testing.T) {
+func TestExamRoomMustBeInValidPattern(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	fixtures := []string{
@@ -84,7 +84,7 @@ func TestRoomExamMustBeInValidPattern(t *testing.T) {
 	for _, fixture := range fixtures {
 		examschedule := ExamSchedule{
 			AcademicYear: 2564,
-			RoomExam: fixture, //ผิด
+			ExamRoom: fixture, //ผิด
 			ExamDate: time.Now().Add(time.Hour*24),
 			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
 			EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),
@@ -115,7 +115,7 @@ func TestDateExamMustBeFuture(t *testing.T) {
 	for _, fixture := range fixtures {
 		examschedule := ExamSchedule{
 			AcademicYear: 2564,
-			RoomExam: "B5204",
+			ExamRoom: "B5204",
 			ExamDate: fixture,
 			StartTime:time.Date(2021, 1, 20, 11, 30, 0, 0, time.Local),
 			EndTime: time.Date(2021, 1, 20, 12, 30, 0, 0, time.Local),

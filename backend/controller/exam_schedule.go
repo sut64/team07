@@ -47,7 +47,7 @@ func CreateExamSchedule(c *gin.Context) {
 		Course:    Course,     // โยงความสัมพันธ์กับ Entity Course
 		ExamType:  ExamType,        // โยงความสัมพันธ์กับ Entity ExamType
 		AcademicYear: ExamSchedule.AcademicYear,
-		RoomExam: ExamSchedule.RoomExam,
+		ExamRoom: ExamSchedule.ExamRoom,
 		ExamDate: ExamSchedule.ExamDate,
 		StartTime: ExamSchedule.StartTime,
 		EndTime: ExamSchedule.EndTime,
