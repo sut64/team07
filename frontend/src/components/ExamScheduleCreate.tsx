@@ -62,8 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ExamScheduleCreate() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [selectTimeStart, setSelectedTimeStart] = useState<Date | null>(new Date());
-  const [selectedTimeend, setSelectedTimeEnd] = useState<Date | null>(new Date());
+  const [selectStartTime, setSelectedStartTime] = useState<Date | null>(new Date());
+  const [selectedEndTime, setSelectedEndTime] = useState<Date | null>(new Date());
   const [ExamTypes, setExamTypes] = useState<ExamTypesInterface[]>([]);
   const [Semesters, setSemesters] = useState<SemestersInterface[]>([]);
   const [Courses, setCourses] = useState<CoursesInterface[]>([]);
@@ -116,12 +116,12 @@ export default function ExamScheduleCreate() {
 
   const handleStartTimeChange = (date: Date | null) => {
     console.log(date);
-    setSelectedTimeStart(date)
+    setSelectedStartTime(date)
   };
 
   const handleEndTimeChange = (date: Date | null) => {
     console.log(date);
-    setSelectedTimeEnd(date)
+    setSelectedEndTime(date)
   };
 
   const getCourses = async () => {
@@ -179,10 +179,10 @@ export default function ExamScheduleCreate() {
       AcademicYear: convertType(ExamSchedule.AcademicYear),
       ExamTypeID: convertType(ExamSchedule.ExamTypeID),
       CourseID: convertType(ExamSchedule.CourseID),
-      RoomExam: ExamSchedule.RoomExam ?? "",
+      ExamRoom: ExamSchedule.ExamRoom ?? "",
       ExamDate: selectedDate,
-      StartTime: selectTimeStart,
-      EndTime: selectedTimeend,
+      StartTime: selectStartTime,
+      EndTime: selectedEndTime,
     };
 
     console.log(data)
@@ -323,12 +323,12 @@ export default function ExamScheduleCreate() {
               <p>ห้องสอบ</p>
               <FormControl fullWidth variant="outlined">
                 <TextField
-                  id="RoomExam"
+                  id="ExamRoom"
                   variant="outlined"
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกห้องสอบ"
-                  value={ExamSchedule.RoomExam || ""}
+                  value={ExamSchedule.ExamRoom || ""}
                   onChange={handleInputChange}
                 />
               </FormControl>
@@ -353,7 +353,7 @@ export default function ExamScheduleCreate() {
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardTimePicker
                     name="StartTime"
-                    value={selectTimeStart}
+                    value={selectStartTime}
                     onChange={handleStartTimeChange}
                     label="กรุณาเลือกเวลาเริ่มต้น"
                     format="hh:mm a"
@@ -367,7 +367,7 @@ export default function ExamScheduleCreate() {
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardTimePicker
                     name="EndTime"
-                    value={selectedTimeend}
+                    value={selectedEndTime}
                     onChange={handleEndTimeChange}
                     label="กรุณาเลือกเวลาสิ้นสุด"
                     format="hh:mm a"
