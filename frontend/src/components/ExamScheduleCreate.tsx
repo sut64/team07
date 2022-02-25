@@ -114,14 +114,14 @@ export default function ExamScheduleCreate() {
     setSelectedDate(date); 
   };
 
-  const handleStartTimeChange = (date: Date | null) => {
-    console.log(date);
-    setSelectedStartTime(date)
+  const handleStartTimeChange = (time: Date | null) => {
+    console.log(time);
+    setSelectedStartTime(time)
   };
 
-  const handleEndTimeChange = (date: Date | null) => {
-    console.log(date);
-    setSelectedEndTime(date)
+  const handleEndTimeChange = (time: Date | null) => {
+    console.log(time);
+    setSelectedEndTime(time)
   };
 
   const getCourses = async () => {
