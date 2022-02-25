@@ -7,7 +7,7 @@ import (
 	"github.com/sut64/team07/entity"
 )
 
-// POST /Course
+// POST /regiscourses
 func CreateRegisCourse(c *gin.Context) {
 	var RegisCourse entity.RegisCourse
 	if err := c.ShouldBindJSON(&RegisCourse); err != nil {
@@ -22,7 +22,7 @@ func CreateRegisCourse(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": RegisCourse})
 }
 
-// GET /Course/:id
+// GET /regiscourses/:id
 func GetRegisCourse(c *gin.Context) {
 	var RegisCourse entity.RegisCourse
 	id := c.Param("id")
@@ -34,7 +34,7 @@ func GetRegisCourse(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": RegisCourse})
 }
 
-// GET /Courses
+// GET /regiscourses
 func ListRegisCoursess(c *gin.Context) {
 	var RegisCourses []entity.RegisCourse
 	if err := entity.DB().Preload("Course").Raw("SELECT * FROM regis_courses ").Scan(&RegisCourses).Error; err != nil {
@@ -56,7 +56,7 @@ func ListRegisCourses(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": RegisCourses})
 }
 
-// DELETE /Courses/:id
+// DELETE /regiscourses/:id
 func DeleteRegisCourse(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM regis_courses WHERE id = ?", id); tx.RowsAffected == 0 {
@@ -67,7 +67,7 @@ func DeleteRegisCourse(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": id})
 }
 
-// PATCH /Courses
+// PATCH /regiscourses
 func UpdateRegisCourse(c *gin.Context) {
 	var RegisCourse entity.Course
 	if err := c.ShouldBindJSON(&RegisCourse); err != nil {
